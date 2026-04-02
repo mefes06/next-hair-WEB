@@ -70,7 +70,7 @@
 
         </div>
 
-
+        <!-- En iyi yorumların geldiği kısım -->
         <div class="ai-quiz-container fade-in-step" id="step-testimonial" style="display: none;">
 
             <div class="testimonial-header">
@@ -119,11 +119,49 @@
 
         </div>
 
+        <div class="ai-quiz-container fade-in-step" id="step-texture" style="display: none;">
+
+            <div class="quiz-progress-wrapper">
+                <span class="progress-label">Hair Profile</span>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 15%;"></div>
+                </div>
+            </div>
+
+            <div class="question-header">
+                <h2 class="question-title">What's your natural hair texture?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectTexture('straight')">
+                    <span class="selection-text">Straight</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTexture('wavy')">
+                    <span class="selection-text">Wavy</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTexture('curly')">
+                    <span class="selection-text">Curly</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTexture('coily')">
+                    <span class="selection-text">Coily</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
     <script>
         // Kullanıcı verileri
         let userData = {
-            gender: ''
+            gender: '',
+            texture: ''
         };
 
         // Kullanıcının geçtiği ekranların geçmişini tutan dizi
@@ -190,8 +228,21 @@
             }
         }
 
+        // Saç dokusu seçimi fonksiyonu
+        function selectTexture(textureValue) {
+            userData.texture = textureValue;
+            console.log("Seçilen Doku:", textureValue);
+
+            // Buraya bir sonraki adımın (Saç Uzunluğu) ID'sini yazacağız
+            // Şimdilik akışı devam ettirmek için:
+            alert("Saç dokusu seçildi: " + textureValue + ". Şimdi Saç Uzunluğu adımına geçiliyor.");
+
+            // changeScreen('step-texture', 'step-length'); // Bir sonraki adım hazır olunca aktif edeceğiz
+        }
+
+        // Yorum ekranındaki CONTINUE butonu artık bu fonksiyonu çağırmalı:
         function goToNextQuestion() {
-            alert('Mükemmel! Şimdi "Doğal saç dokunuz nasıl?" sorusuna geçilecek.');
+            changeScreen('step-testimonial', 'step-texture');
         }
     </script>
 </body>
