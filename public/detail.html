@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detay - Hair Colors</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /*SLIDER VE KAYNAK LİNKİ STİLLERİ*/
+        .slider-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-arrow {
+            background: none;
+            border: none;
+            color: #666;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .nav-arrow:hover {
+            color: #d32f2f;
+        }
+
+        .next-style-btn {
+            background-color: #5d78ff;
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 4px;
+        }
+
+        .next-style-btn:hover {
+            background-color: #445edb;
+        }
+
+        .slide-counter {
+            font-family: 'Lato', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .active-slide-area {
+            position: relative;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .slide-img-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        #slideImg {
+            max-width: 100%;
+            height: auto;
+            max-height: 700px;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .pin-save-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #e60023;
+            color: white !important;
+            padding: 6px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        #slideDesc {
+            text-align: left;
+            margin-top: 25px;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* Kaynak Linki Stili */
+        #slideSource {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #888;
+            font-family: 'Lato', sans-serif;
+        }
+
+        #slideSource a {
+            color: #555;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        #slideSource a:hover {
+            color: #d32f2f;
+            text-decoration: underline;
+        }
+
+        /* Karanlık Mod */
+        body[data-theme="dark"] .slide-counter {
+            color: #eee;
+        }
+
+        body[data-theme="dark"] .nav-arrow {
+            color: #bbb;
+        }
+
+        body[data-theme="dark"] #slideSource {
+            color: #bbb;
+        }
+
+        body[data-theme="dark"] #slideSource a {
+            color: #ccc;
+        }
+
+        body[data-theme="dark"] #slideSource a:hover {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <h1 class="site-logo"><a href="/">Next Hair</a></h1>
+                <span class="site-slogan">For Men and Women</span>
+            </div>
+            <div class="top-icons">
+                <div class="icon-item" onclick="sirala('latest', this)"><i class="bi bi-clock-history"></i> LATEST</div>
+                <div class="icon-item" onclick="sirala('popular', this)"><i class="bi bi-star-fill"></i> POPULAR</div>
+                <div class="icon-item" onclick="sirala('hot', this)"><i class="bi bi-fire"></i> HOT</div>
+                <div class="icon-item" onclick="sirala('trending', this)"><i class="bi bi-graph-up-arrow"></i> TRENDING
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-navbar">
+        <div class="container nav-content">
+            <div class="mobile-menu-btn"><i class="bi bi-list"></i></div>
+            <ul class="nav-links">
+                <li><a href="/">HOME</a></li>
+                <li class="has-dropdown">
+                    <a href="#">HAIRCUTS AND HAIRSTYLES <i class="bi bi-chevron-down"></i></a>
+                    <ul class="sub-menu" id="navHaircuts"></ul>
+                </li>
+                <li class="has-dropdown">
+                    <a href="#">HAIR COLORS <i class="bi bi-chevron-down"></i></a>
+                    <ul class="sub-menu" id="navColors"></ul>
+                </li>
+                <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/contact">CONTACT US</a></li>
+            </ul>
+            <div class="nav-right-icons" style="position: relative;">
+                <i class="bi bi-search" id="navSearchIcon" onclick="aramaKutusunuAc()" style="cursor: pointer;"></i>
+                <div id="navSearchBox" class="nav-search-dropdown">
+                    <input type="text" id="navSearchInput" placeholder="Type and hit enter...">
+                </div>
+                <i class="bi bi-moon-fill" id="themeBtn" onclick="temayiDegistir()" style="cursor: pointer;"></i>
+                <i class="bi bi-person-circle" id="adminBtn" title="Admin"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-2">
+        <div class="top-strip" id="topStrip"></div>
+    </div>
+    <hr class="divider">
+
+    <div class="container main-layout">
+        <main class="content-area">
+            <div id="loading" style="text-align:center; padding:50px; color:#888;">Yükleniyor...</div>
+
+            <div id="detailContent" class="hidden">
+                <p style="font-size: 13px; color: #888; margin-bottom: 15px; font-family: 'Lato', sans-serif;">
+                    <a href="/" style="text-decoration: none; color: #888; transition:0.2s;"
+                        onmouseover="this.style.color='#d32f2f'" onmouseout="this.style.color='#888'">Home</a> &gt;
+                    <a id="dCategoryLink" href="#"
+                        style="text-decoration: none; color: #d32f2f; font-weight: bold; transition:0.2s;">Category</a>
+                    &gt;
+                    <span id="dBreadcrumbTitle" style="color: #aaa; text-transform: capitalize;">...</span>
+                </p>
+
+                <h1 id="dTitle" class="blog-title" style="font-size: 32px; margin-bottom: 10px;"></h1>
+                <div id="dCategoryLinks" class="category-tags-container"></div>
+
+                <div class="blog-meta"
+                    style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 25px;">
+                    <i class="bi bi-calendar3"></i> <span id="dDate"></span>
+
+                    <span id="dUpdateWrapper" style="display:none; margin-left: 8px; color: #d32f2f; font-size: 0.9em;">
+                        <i class="bi bi-arrow-repeat"></i> Updated: <span id="dUpdateDate"></span>
+                    </span>
+
+                    &nbsp;|&nbsp;
+                    <i class="bi bi-eye-fill"></i> <span id="dViews"></span> Views &nbsp;|&nbsp;
+                    <i class="bi bi-folder-fill"></i> <span id="dCatName"></span>
+                </div>
+
+                <div class="article-container">
+                    <div class="share-sidebar">
+                        <div class="sticky-share">
+                            <div class="share-count-box">
+                                <span class="share-number" id="dShares">0</span>
+                                <span class="share-label">SHARES</span>
+                            </div>
+                            <button onclick="paylas('facebook')" class="share-btn-vertical fb"><i
+                                    class="bi bi-facebook"></i></button>
+                            <button onclick="paylas('twitter')" class="share-btn-vertical x"><i
+                                    class="bi bi-twitter-x"></i></button>
+                            <button onclick="paylas('whatsapp')" class="share-btn-vertical wa"><i
+                                    class="bi bi-whatsapp"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="article-body">
+                        <div class="slider-nav">
+                            <button onclick="degistirSlide(-1)" class="nav-arrow">
+                                <i class="bi bi-chevron-left"></i> Previous
+                            </button>
+                            <div class="slide-counter"><span id="currentNum">1</span>/<span id="totalNum">1</span></div>
+                            <button onclick="degistirSlide(1)" class="nav-arrow next-style-btn">
+                                Next style <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="active-slide-area">
+                            <div class="slide-img-container">
+                                <a href="javascript:void(0)" onclick="pinterestPaylas()" class="pin-save-btn">
+                                    <i class="bi bi-pinterest"></i> Save
+                                </a>
+                                <img id="slideImg" loading="eager" src="" alt="Style">
+                                <div id="slideSource"></div>
+                            </div>
+                            <div id="slideDesc" class="slide-description-text"></div>
+                        </div>
+
+                        <div style="margin-top: 40px;">
+                            <a href="/" class="pagination-btn" style="text-decoration: none; display: inline-block;">
+                                <i class="bi bi-arrow-left"></i> Back to Home Page
+                            </a>
+                        </div>
+
+                        <div id="relatedSection"
+                            style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #eee; display: none;">
+                            <h3
+                                style="font-size: 22px; font-weight: bold; margin-bottom: 20px; color: #333; font-family: 'Playfair Display', serif;">
+                                You Might Also Like
+                            </h3>
+
+                            <div id="relatedContainer"
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                            </div>
+                        </div>
+
+                        <div id="relatedSection"
+                            style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #eee; display: none;">
+                            <h3
+                                style="font-size: 22px; font-weight: bold; margin-bottom: 20px; color: #333; font-family: 'Playfair Display', serif;">
+                                You Might Also Like
+                            </h3>
+
+                            <div id="relatedContainer"
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">HAIRCUTS & HAIR COLORS</h3>
+                <p class="widget-text">Latest hair colors ideas and shapes for men and women.</p>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search for...">
+                    <i class="bi bi-search"></i>
+                </div>
+            </div>
+
+            <div class="ad-placeholder">ADVERT AREA</div>
+
+            <div class="sidebar-list">
+                <h3 class="widget-title" style="margin-bottom: 15px;">TRENDING</h3>
+
+                <div class="list-item"><span class="rank">1</span>
+                    <div class="list-info">🧔 <b>Natural Gray</b> Hair Remedies</div>
+                </div>
+                <div class="list-item"><span class="rank">2</span>
+                    <div class="list-info">✂️ <b>Best Hair</b> Colour for Older Women</div>
+                </div>
+            </div>
+
+            <div class="sidebar-widget mt-2">
+                <h3 class="widget-title">CATEGORIES</h3>
+                <ul class="category-list" id="publicCategoryList"></ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-col brand-col">
+                <h2 class="footer-logo">Next Hair</h2>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Next Hair Magazine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

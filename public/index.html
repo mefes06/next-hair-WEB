@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Hair - Magazine</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <h1 class="site-logo"><a href="/">Next Hair</a></h1>
+                <span class="site-slogan">For Men and Women</span>
+            </div>
+            <div class="top-icons">
+                <div class="icon-item" onclick="sirala('latest', this)">
+                    <i class="bi bi-clock-history"></i> LATEST
+                </div>
+
+                <div class="icon-item" onclick="sirala('popular', this)">
+                    <i class="bi bi-star-fill"></i> POPULAR
+                </div>
+
+                <div class="icon-item" onclick="sirala('hot', this)">
+                    <i class="bi bi-fire"></i> HOT
+                </div>
+
+                <div class="icon-item" onclick="sirala('trending', this)">
+                    <i class="bi bi-graph-up-arrow"></i> TRENDING
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-navbar">
+        <div class="container nav-content">
+            <div class="mobile-menu-btn"><i class="bi bi-list"></i></div>
+
+            <ul class="nav-links">
+                <li><a href="/" class="active">HOME</a></li>
+
+                <li class="has-dropdown">
+                    <a href="#">HAIRCUTS AND HAIRSTYLES <i class="bi bi-chevron-down"></i></a>
+                    <ul class="sub-menu" id="navHaircuts"></ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="#">HAIR COLORS <i class="bi bi-chevron-down"></i></a>
+                    <ul class="sub-menu" id="navColors"></ul>
+                </li>
+
+                <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/contact">CONTACT US</a></li>
+            </ul>
+            <div class="nav-right-icons" style="position: relative;"> <i class="bi bi-search" id="navSearchIcon"
+                    onclick="aramaKutusunuAc()" style="cursor: pointer;"></i>
+
+                <div id="navSearchBox" class="nav-search-dropdown">
+                    <input type="text" id="navSearchInput" placeholder="Type and hit enter...">
+                </div>
+                <i class="bi bi-moon-fill" id="themeBtn" onclick="temayiDegistir()" style="cursor: pointer;"></i>
+                <a href="login.html" class="admin-link">
+                    <i class="bi bi-person-circle" id="adminBtn" title="Admin"></i>
+                </a>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-2">
+        <div class="top-strip" id="topStrip"></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="container main-layout">
+
+        <main class="content-area">
+            <h2 class="section-title">MORE STORIES</h2>
+            <div id="blogFeed" class="blog-grid">
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">HAIRCUTS & HAIR COLORS</h3>
+                <p class="widget-text">
+                    Latest hair colors ideas and shapes for men and women. Favorite hair colors of popular celebrities.
+                    You can follow all the hair color in the World.
+                </p>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search for...">
+                    <i class="bi bi-search"></i>
+                </div>
+            </div>
+
+            <div class="ad-placeholder">ADVERT AREA</div>
+
+            <div class="sidebar-list">
+                <h3 class="sidebar-header">TRENDING</h3>
+
+                <div class="list-item">
+                    <span class="rank">1</span>
+                    <div class="list-info">🧔 <b>Natural Gray</b> Hair Remedies</div>
+                </div>
+                <div class="list-item">
+                    <span class="rank">2</span>
+                    <div class="list-info">✂️ <b>Best Hair</b> Colour for Older Women</div>
+                </div>
+                <div class="list-item">
+                    <span class="rank">3</span>
+                    <div class="list-info">💇‍♀️ <b>Hair</b> Color Shades for <b>Gray Hair</b></div>
+                </div>
+            </div>
+
+            <div class="sidebar-widget mt-2">
+                <h3 class="widget-title">CATEGORIES</h3>
+                <ul class="category-list" id="publicCategoryList">
+                </ul>
+            </div>
+        </aside>
+
+    </div>
+
+    <div id="paginationControls" class="pagination-wrapper" style="display: none;">
+        <button id="prevBtn" onclick="sayfaDegistir(-1)" class="page-btn prev-next">
+            <i class="bi bi-chevron-left"></i> Prev
+        </button>
+
+        <div id="pageNumbers" class="page-numbers"></div>
+
+        <button id="nextBtn" onclick="sayfaDegistir(1)" class="page-btn prev-next">
+            Next <i class="bi bi-chevron-right"></i>
+        </button>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+
+            <div class="footer-col brand-col">
+                <h2 class="footer-logo">Next Hair</h2>
+                <p class="footer-desc">
+                    Hair Colors is a digital fashion magazine offering the latest hair trends, color ideas, and care
+                    tips for women and men.
+                </p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/haircolors" target="_blank" class="social-icon" title="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="https://x.com/haircolors" target="_blank" class="social-icon" title="X (Twitter)">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/haircolors" target="_blank" class="social-icon"
+                        title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="https://www.pinterest.com/haircolors" target="_blank" class="social-icon"
+                        title="Pinterest">
+                        <i class="bi bi-pinterest"></i>
+                    </a>
+
+                    <a href="https://www.youtube.com/@7AOrigami" target="_blank" class="social-icon" title="YouTube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col links-col">
+                <h3 class="footer-title">FAST MENU</h3>
+                <ul class="footer-links">
+                    <li><a href="/">Home Page</a></li>
+                    <li><a href="/?category=Haircuts">Hairstyles and Haircuts</a></li>
+                    <li><a href="/?category=Colors">Hair Colors</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col contact-col">
+                <h3 class="footer-title">CONTACT US</h3>
+                <ul class="contact-list">
+                    <li>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Ankara, Turkey</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>info@nexthair.com</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>+90 (212) 555 00 00</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Next Hair Magazine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

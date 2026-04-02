@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Hair Colors</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <h1 class="site-logo"><a href="/">Hair Colors</a></h1>
+                <span class="site-slogan">For Men and Women</span>
+            </div>
+            <div class="top-icons">
+                <a href="/?filter=latest" class="icon-item"><i class="bi bi-clock-history"></i> LATEST</a>
+                <a href="/?filter=popular" class="icon-item"><i class="bi bi-star-fill"></i> POPULAR</a>
+                <a href="/?filter=hot" class="icon-item"><i class="bi bi-fire"></i> HOT</a>
+                <a href="/?filter=trending" class="icon-item"><i class="bi bi-graph-up-arrow"></i> TRENDING</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-navbar">
+        <div class="container nav-content">
+            <div class="mobile-menu-btn"><i class="bi bi-list"></i></div>
+
+            <ul class="nav-links">
+                <li><a href="/">HOME</a></li>
+
+                <li class="has-dropdown">
+                    <a href="#">HAIRCUTS AND HAIRSTYLES <i class="bi bi-chevron-down"></i></a>
+                    <ul class="sub-menu" id="navHaircuts"></ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="#">HAIR COLORS <i class="bi bi-chevron-down"></i></a>
+                    <ul class="sub-menu" id="navColors"></ul>
+                </li>
+
+                <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/contact" class="active">CONTACT US</a></li>
+            </ul>
+
+            <div class="nav-right-icons" style="position: relative;">
+                <i class="bi bi-search" id="navSearchIcon" onclick="aramaKutusunuAc()" style="cursor: pointer;"></i>
+
+                <div id="navSearchBox" class="nav-search-dropdown">
+                    <input type="text" id="navSearchInput" placeholder="Type and hit enter...">
+                </div>
+                <i class="bi bi-moon-fill" id="themeBtn" onclick="temayiDegistir()" style="cursor: pointer;"></i>
+                <i class="bi bi-person-circle" id="adminBtn" title="Admin"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-2">
+        <div class="top-strip" id="topStrip"></div>
+    </div>
+    <hr class="divider">
+
+    <div class="container main-layout">
+
+        <main class="content-area">
+
+            <h2
+                style="font-family: 'Playfair Display', serif; font-size: 27px; font-weight: 700; margin-bottom: 20px; color: #2f4f4f; text-transform: uppercase;">
+                BİZE ULAŞIN
+            </h2>
+
+            <p style="margin-bottom: 25px; font-size: 16px; color: #555;">
+                Öneri, şikayet veya işbirliği teklifleriniz için aşağıdaki formu doldurarak bize ulaşabilirsiniz.
+                Ekibimiz en kısa sürede size dönüş yapacaktır.
+            </p>
+
+            <form style="display: flex; flex-direction: column; gap: 20px;">
+
+                <div>
+                    <label
+                        style="font-weight: bold; font-size: 13px; color: #333; display: block; margin-bottom: 5px;">ADINIZ
+                        SOYADINIZ</label>
+                    <input type="text" id="cName" placeholder="Adınız Soyadınız"
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; background: #fcfcfc; font-family: 'Lato', sans-serif;">
+                </div>
+
+                <div>
+                    <label
+                        style="font-weight: bold; font-size: 13px; color: #333; display: block; margin-bottom: 5px;">E-MAIL
+                        ADRESİNİZ</label>
+                    <input type="email" id="cEmail" placeholder="ornek@email.com"
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; background: #fcfcfc; font-family: 'Lato', sans-serif;">
+                </div>
+
+                <div>
+                    <label
+                        style="font-weight: bold; font-size: 13px; color: #333; display: block; margin-bottom: 5px;">MESAJINIZ</label>
+                    <textarea id="cMessage" rows="6" placeholder="Bize ne söylemek istersiniz?"
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; background: #fcfcfc; font-family: 'Lato', sans-serif; resize: vertical;"></textarea>
+                </div>
+
+                <button type="button" id="submitBtn" onclick="mesajGonder()" class="pagination-btn"
+                    style="background: #2f4f4f; color: white; border: none; width: fit-content; padding: 12px 40px; border-radius: 4px; cursor: pointer;">
+                    GÖNDER
+                </button>
+
+                <div id="formStatus" style="font-weight: bold; font-size: 14px; margin-top: -10px;"></div>
+
+            </form>
+
+            <div
+                style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 30px; display: flex; gap: 30px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="bi bi-geo-alt-fill" style="color:#d32f2f; font-size: 24px;"></i>
+                    <div>
+                        <strong style="display: block; font-size: 14px;">ADRES</strong>
+                        <span style="font-size: 14px; color: #666;">İstanbul, Türkiye</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="bi bi-envelope-fill" style="color:#d32f2f; font-size: 24px;"></i>
+                    <div>
+                        <strong style="display: block; font-size: 14px;">E-MAIL</strong>
+                        <span style="font-size: 14px; color: #666;">info@haircolors.com</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">BİZİ TAKİP EDİN</h3>
+                <p class="widget-text">
+                    Sosyal medya hesaplarımızdan bizi takip ederek en yeni trendlerden anında haberdar olabilirsiniz.
+                </p>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search for...">
+                    <i class="bi bi-search"></i>
+                </div>
+            </div>
+
+            <div class="sidebar-widget mt-2">
+                <h3 class="widget-title">CATEGORIES</h3>
+                <ul class="category-list" id="publicCategoryList">
+                </ul>
+            </div>
+        </aside>
+
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+
+            <div class="footer-col brand-col">
+                <h2 class="footer-logo">Next Hair</h2>
+                <p class="footer-desc">
+                    Hair Colors is a digital fashion magazine offering the latest hair trends, color ideas, and care
+                    tips for women and men.
+                </p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/haircolors" target="_blank" class="social-icon" title="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="https://x.com/haircolors" target="_blank" class="social-icon" title="X (Twitter)">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/haircolors" target="_blank" class="social-icon"
+                        title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="https://www.pinterest.com/haircolors" target="_blank" class="social-icon"
+                        title="Pinterest">
+                        <i class="bi bi-pinterest"></i>
+                    </a>
+
+                    <a href="https://www.youtube.com/@7AOrigami" target="_blank" class="social-icon" title="YouTube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col links-col">
+                <h3 class="footer-title">FAST MENU</h3>
+                <ul class="footer-links">
+                    <li><a href="/">Home Page</a></li>
+                    <li><a href="/?category=Haircuts">Hairstyles and Haircuts</a></li>
+                    <li><a href="/?category=Colors">Hair Colors</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col contact-col">
+                <h3 class="footer-title">CONTACT US</h3>
+                <ul class="contact-list">
+                    <li>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Ankara, Turkey</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>info@nexthair.com</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>+90 (212) 555 00 00</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Next Hair Magazine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        async function mesajGonder() {
+            const name = document.getElementById("cName").value;
+            const email = document.getElementById("cEmail").value;
+            const message = document.getElementById("cMessage").value;
+            const statusDiv = document.getElementById("formStatus");
+            const btn = document.getElementById("submitBtn");
+
+            // Boş alan kontrolü
+            if (!name || !email || !message) {
+                statusDiv.style.color = "#d32f2f"; // Hata rengi
+                statusDiv.textContent = "Lütfen tüm alanları doldurunuz!";
+                return;
+            }
+
+            // Butonu kilitle
+            btn.disabled = true;
+            btn.textContent = "Gönderiliyor...";
+            btn.style.opacity = "0.7";
+
+            try {
+                const res = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    // Başarılı
+                    statusDiv.style.color = "green";
+                    statusDiv.textContent = "Mesajınız başarıyla iletildi! En kısa sürede döneceğiz.";
+
+                    // Formu temizle
+                    document.getElementById("cName").value = "";
+                    document.getElementById("cEmail").value = "";
+                    document.getElementById("cMessage").value = "";
+                } else {
+                    // Hata
+                    statusDiv.style.color = "#d32f2f";
+                    statusDiv.textContent = data.error || "Bir hata oluştu.";
+                }
+
+            } catch (err) {
+                console.error(err);
+                statusDiv.style.color = "#d32f2f";
+                statusDiv.textContent = "Sunucu ile bağlantı kurulamadı!";
+            } finally {
+                // Butonu eski haline getir
+                btn.disabled = false;
+                btn.textContent = "GÖNDER";
+                btn.style.opacity = "1";
+            }
+        }
+    </script>
+</body>
+
+</html>
