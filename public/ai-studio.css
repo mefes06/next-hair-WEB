@@ -1,0 +1,161 @@
+/* AI Studio Özel Tasarımı */
+.ai-studio-wrapper {
+    background-color: #ffffff;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.ai-quiz-container {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Başlık Kısımları */
+.quiz-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: #1a2b3c;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    font-weight: 900;
+}
+
+.quiz-header p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.quiz-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    display: inline-block;
+    margin-bottom: 80px; /* Kafaların taşması için boşluk */
+}
+
+/* Kart Grid ve Kafa Taşma Efekti (Pop-out) */
+.gender-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.gender-card {
+    position: relative;
+    width: 240px;
+    height: 180px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 16px;
+}
+
+.gender-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Kartın arka fonu (Bej kısım) */
+.card-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #dfd6ca; /* Resimdeki üst bej renk */
+    border-radius: 16px;
+    z-index: 1;
+}
+
+/* Fotoğraf (Taşan kısım) */
+.person-img {
+    position: absolute;
+    bottom: 40px; /* Alt etiketin hemen üstüne oturur */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px; /* Fotoğraf boyutunu buradan ayarlayabilirsin */
+    height: auto;
+    z-index: 2;
+    pointer-events: none; /* Fotoğrafa tıklansa bile kart tıklanmış sayılsın */
+}
+
+/* Alt kısımdaki renkli alan (Gradient) */
+.card-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to right, #dca87d, #a593c6);
+    border-radius: 0 0 16px 16px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #111;
+    font-size: 16px;
+}
+
+/* Footer ve Trust Alanı */
+.quiz-footer {
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.how-it-works {
+    color: #555;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 25px;
+}
+
+.trust-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.avatars {
+    display: flex;
+}
+
+.avatars img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-left: -10px;
+}
+.avatars img:first-child { margin-left: 0; }
+
+.trust-section span {
+    font-size: 14px;
+    color: #444;
+}
+
+.terms-text {
+    font-size: 12px;
+    color: #888;
+}
+
+.terms-text a {
+    color: #a593c6;
+    text-decoration: none;
+}
