@@ -40,7 +40,8 @@
     border-bottom: 2px solid #ddd;
     padding-bottom: 5px;
     display: inline-block;
-    margin-bottom: 80px; /* Kafaların taşması için boşluk */
+    margin-bottom: 80px;
+    /* Kafaların taşması için boşluk */
 }
 
 /* Kart Grid ve Kafa Taşma Efekti (Pop-out) */
@@ -71,7 +72,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #dfd6ca; /* Resimdeki üst bej renk */
+    background-color: #dfd6ca;
+    /* Resimdeki üst bej renk */
     border-radius: 16px;
     z-index: 1;
 }
@@ -79,13 +81,16 @@
 /* Fotoğraf (Taşan kısım) */
 .person-img {
     position: absolute;
-    bottom: 40px; /* Alt etiketin hemen üstüne oturur */
+    bottom: 40px;
+    /* Alt etiketin hemen üstüne oturur */
     left: 50%;
     transform: translateX(-50%);
-    width: 200px; /* Fotoğraf boyutunu buradan ayarlayabilirsin */
+    width: 200px;
+    /* Fotoğraf boyutunu buradan ayarlayabilirsin */
     height: auto;
     z-index: 2;
-    pointer-events: none; /* Fotoğrafa tıklansa bile kart tıklanmış sayılsın */
+    pointer-events: none;
+    /* Fotoğrafa tıklansa bile kart tıklanmış sayılsın */
 }
 
 /* Alt kısımdaki renkli alan (Gradient) */
@@ -143,7 +148,10 @@
     border: 2px solid #fff;
     margin-left: -10px;
 }
-.avatars img:first-child { margin-left: 0; }
+
+.avatars img:first-child {
+    margin-left: 0;
+}
 
 .trust-section span {
     font-size: 14px;
@@ -158,4 +166,260 @@
 .terms-text a {
     color: #a593c6;
     text-decoration: none;
+}
+
+/* --- ADIM 1.5: SOSYAL KANIT VE YORUM EKRANI STİLLERİ --- */
+
+/* Geçiş efekti (Yumuşak fade-in) */
+.fade-in-step {
+    animation: fadeInStep 0.6s ease-in-out;
+}
+
+@keyframes fadeInStep {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Başlık Stilleri */
+.testimonial-header h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 34px;
+    color: #222;
+    line-height: 1.4;
+    margin-bottom: 45px;
+    font-weight: 700;
+}
+
+.gold-text {
+    color: #c9ac71;
+    /* Referans resmindeki o altın/hardal rengi */
+    font-weight: 700;
+}
+
+/* Yorum Kartı (Review Card) - Güzelleştirilmiş */
+.review-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: left;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    /* Yumuşak ve profesyonel gölge */
+    margin-bottom: 35px;
+    border: 1px solid #f1f1f1;
+}
+
+.review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.reviewer-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-circle {
+    width: 44px;
+    height: 44px;
+    background: #f1edff;
+    /* Açık mor zemin */
+    color: #8b5cf6;
+    /* Mor harf */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.reviewer-name {
+    font-weight: 700;
+    color: #111;
+    font-size: 17px;
+}
+
+.verified-badge {
+    color: #10b981;
+    /* Yeşil rozet rengi */
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.review-stars {
+    color: #fbbf24;
+    /* Yıldız sarısı */
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+
+.review-text {
+    font-size: 17px;
+    color: #444;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.review-text strong {
+    color: #111;
+}
+
+/* İstatistik Listesi */
+.stats-list {
+    text-align: left;
+    max-width: 450px;
+    margin: 0 auto 40px auto;
+    /* Ortalamak için */
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.stat-item i {
+    color: #c9ac71;
+    /* İkon rengi altın */
+    font-size: 22px;
+}
+
+/* Devam Butonu (CONTINUE) - Referanstaki gibi */
+.gold-continue-btn {
+    width: 100%;
+    max-width: 420px;
+    background-color: #c9ac71;
+    /* Sarı/Altın zemin */
+    color: #ffffff;
+    border: none;
+    padding: 18px;
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 50px;
+    font-family: 'Lato', sans-serif;
+}
+
+.gold-continue-btn:hover {
+    background-color: #b1965f;
+    transform: translateY(-2px);
+}
+
+/* Basın Logoları Alanı */
+.featured-in-section p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.featured-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    opacity: 0.6;
+    /* Logoları hafif silikleştirip profesyonel durmasını sağla */
+}
+
+/* Temsili Logo Tasarımları */
+.f-logo {
+    font-size: 24px;
+    color: #333;
+}
+
+.yahoo-logo {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.bustle-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+}
+
+.huffpost-logo {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 20px;
+}
+
+/* Karanlık Mod Desteği */
+body[data-theme="dark"] .ai-studio-wrapper {
+    background-color: #121212;
+}
+
+body[data-theme="dark"] .testimonial-header h2,
+body[data-theme="dark"] .reviewer-name,
+body[data-theme="dark"] .stat-item {
+    color: #eee;
+}
+
+body[data-theme="dark"] .review-card {
+    background-color: #1a1a1a;
+    border-color: #333;
+}
+
+/* --- HEADER GERİ BUTONU STİLLERİ --- */
+.ai-studio-header {
+    position: relative;
+    /* Butonu sola sabitleyebilmek için */
+}
+
+.header-back-btn {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    /* Yukarıdan %50 itiyoruz */
+    transform: translateY(-50%);
+    /* Kendi yüksekliğinin yarısı kadar geri çekip tam dikey ortalıyoruz */
+    background: none;
+    border: none;
+    font-size: 20px;
+    /* İkonu büyüttük (eskiden 16px'di, zevkine göre 28-30 da yapabilirsin) */
+    cursor: pointer;
+    color: #333;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: color 0.2s ease;
+    z-index: 10;
+    /* Tıklanabilirliğini garantilemek için üstte tutuyoruz */
+}
+
+.header-back-btn:hover {
+    color: #c9ac71;
+    /* Hover durumunda altın rengi */
+}
+
+/* Karanlık Mod Desteği */
+body[data-theme="dark"] .header-back-btn {
+    color: #ccc;
+}
+
+body[data-theme="dark"] .header-back-btn:hover {
+    color: #c9ac71;
 }

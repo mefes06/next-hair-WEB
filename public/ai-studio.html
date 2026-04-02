@@ -15,15 +15,21 @@
 
 <body>
     <header class="top-header ai-studio-header">
-        <div class="container" style="display: flex; justify-content: center;">
+        <div class="container" style="display: flex; justify-content: center; ">
+
+            <button id="backBtn" class="header-back-btn" onclick="goBack()" style="display: none;">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+
             <div class="logo-area" style="text-align: center;">
                 <h1 class="site-logo" style="margin: 0;"><a href="/">Next Hair</a></h1>
-                <span class="site-slogan" style="display: block; font-size: 14px; margin-top: 5px;">AI Studıo</span>
+                <span class="site-slogan" style="display: block; font-size: 14px; margin-top: 5px;">AI Studio</span>
             </div>
         </div>
     </header>
     <div class="ai-studio-wrapper">
-        <div class="ai-quiz-container">
+
+        <div class="ai-quiz-container" id="step-gender" style="display: block;">
 
             <div class="quiz-header">
                 <h2>Find Your Best<br>Hairstyle Yet ✨</h2>
@@ -32,13 +38,13 @@
             </div>
 
             <div class="gender-cards-wrapper">
-                <div class="gender-card" onclick="alert('Kadın seçildi! (2. adıma geçilecek)')">
+                <div class="gender-card" onclick="selectGender('female')">
                     <div class="card-bg"></div>
                     <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Woman" class="person-img">
                     <div class="card-label">Woman <i class="bi bi-arrow-right"></i></div>
                 </div>
 
-                <div class="gender-card" onclick="alert('Erkek seçildi! (2. adıma geçilecek)')">
+                <div class="gender-card" onclick="selectGender('male')">
                     <div class="card-bg"></div>
                     <img src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="Man" class="person-img">
                     <div class="card-label">Man <i class="bi bi-arrow-right"></i></div>
@@ -63,8 +69,131 @@
             </div>
 
         </div>
-    </div>
 
+
+        <div class="ai-quiz-container fade-in-step" id="step-testimonial" style="display: none;">
+
+            <div class="testimonial-header">
+                <h2 id="dynamicTestimonialTitle">Over <span class="gold-text">15,000 women</span> have<br>discovered
+                    their <span class="gold-text">perfect hairstyle<br>match</span></h2>
+            </div>
+
+            <div class="review-card">
+                <div class="review-top">
+                    <div class="reviewer-profile">
+                        <div class="avatar-circle" id="testimonialAvatar">S</div>
+                        <span class="reviewer-name" id="testimonialName">Sarah, 43</span>
+                        <span class="verified-badge"><i class="bi bi-check-circle-fill"></i> Verified</span>
+                    </div>
+                    <div class="review-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                            class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                </div>
+                <p class="review-text" id="testimonialText">"Helps you rule out all those styles you've often thought
+                    about</strong>,
+                    and shows you what looks best with YOUR face. It's great."</p>
+            </div>
+
+            <div class="stats-list">
+                <div class="stat-item">
+                    <i class="bi bi-person"></i>
+                    <span><strong>450+ users</strong> have found their ideal style today.</span>
+                </div>
+                <div class="stat-item">
+                    <i class="bi bi-chat-square-quote"></i>
+                    <span>Trusted by over <strong>15,000</strong> satisfied clients.</span>
+                </div>
+            </div>
+
+            <button class="gold-continue-btn" onclick="goToNextQuestion()">CONTINUE</button>
+
+            <div class="featured-in-section">
+                <p>As featured in</p>
+                <div class="featured-logos">
+                    <span class="f-logo yahoo-logo">yahoo!</span>
+                    <span class="f-logo bustle-logo">Bustle</span>
+                    <span class="f-logo huffpost-logo">HUFFPOST</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        // Kullanıcı verileri
+        let userData = {
+            gender: ''
+        };
+
+        // Kullanıcının geçtiği ekranların geçmişini tutan dizi
+        let stepHistory = ['step-gender'];
+
+        function selectGender(selectedGender) {
+            userData.gender = selectedGender;
+
+            const titleEl = document.getElementById('dynamicTestimonialTitle');
+            const nameEl = document.getElementById('testimonialName');
+            const avatarEl = document.getElementById('testimonialAvatar');
+            const textEl = document.getElementById('testimonialText');
+
+            if (selectedGender === 'male') {
+                // Erkek İçeriği
+                titleEl.innerHTML = 'Over <span class="gold-text">15,000 men</span> have<br>discovered their <span class="gold-text">perfect hairstyle<br>match</span>';
+                nameEl.innerText = 'James, 34';
+                avatarEl.innerText = 'J';
+                avatarEl.style.background = '#e0f2fe'; // James için hafif mavi tonu
+                avatarEl.style.color = '#0284c7';
+                textEl.innerHTML = '"This app showed me I could <strong>pull off a fade before I actually committed</strong> to cutting it. My barber finally understood exactly what I wanted."';
+            } else {
+                // Kadın İçeriği (Sarah)
+                titleEl.innerHTML = 'Over <span class="gold-text">15,000 women</span> have<br>discovered their <span class="gold-text">perfect hairstyle<br>match</span>';
+                nameEl.innerText = 'Sarah, 43';
+                avatarEl.innerText = 'S';
+                avatarEl.style.background = '#f1edff'; // Sarah için orijinal mor tonu
+                avatarEl.style.color = '#8b5cf6';
+                textEl.innerHTML = '"Helps you <strong>rule out all those styles you\'ve often thought about</strong>, and shows you what looks best with YOUR face. It\'s great."';
+            }
+
+            changeScreen('step-gender', 'step-testimonial');
+        }
+
+        // Ekran değiştirme ve geçmişi yönetme fonksiyonu (Tüm adımlarda bunu kullanacağız)
+        function changeScreen(currentStepId, nextStepId) {
+            document.getElementById(currentStepId).style.display = 'none';
+            document.getElementById(nextStepId).style.display = 'block';
+
+            // Yeni ekranı geçmişe ekle
+            stepHistory.push(nextStepId);
+
+            // Artık ilk ekranda değiliz, Geri butonunu göster (flex yapısı için)
+            document.getElementById('backBtn').style.display = 'flex';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Dinamik Geri Dönüş Fonksiyonu
+        function goBack() {
+            if (stepHistory.length > 1) {
+                // Şu anki ekranı diziden çıkar ve gizle
+                const currentStep = stepHistory.pop();
+                document.getElementById(currentStep).style.display = 'none';
+
+                // Dizide kalan son ekranı (bir öncekini) göster
+                const previousStep = stepHistory[stepHistory.length - 1];
+                document.getElementById(previousStep).style.display = 'block';
+
+                // Eğer en başa (Cinsiyet seçimine) döndüysek geri butonunu tekrar gizle
+                if (stepHistory.length === 1) {
+                    document.getElementById('backBtn').style.display = 'none';
+                }
+            }
+        }
+
+        function goToNextQuestion() {
+            alert('Mükemmel! Şimdi "Doğal saç dokunuz nasıl?" sorusuna geçilecek.');
+        }
+    </script>
 </body>
 
 </html>
