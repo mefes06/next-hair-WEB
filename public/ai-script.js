@@ -8,6 +8,9 @@ let userData = {
     length: '',
     thickness: '',
     conditions: [], // ÇOKLU SEÇİM İÇİN YENİ EKLENDİ (Dizi/Array olarak)
+    color: '', // YENİ EKLENDİ
+    changeColor: '',
+    shades: [],
     thinning: '',
     faceShape: '',
     goal: '',
@@ -172,8 +175,9 @@ function toggleCondition(element, conditionValue) {
 }
 
 // "NEXT STEP" butonuna basıldığında çalışacak fonksiyon
+// Adım 8'den (Condition) Adım 9'a (Refine) geçiş
 function goToNextFromCondition() {
-    // Kullanıcı hiçbir şey seçmediyse uyar (İstersen bu zorunluluğu kaldırabilirsin)
+    // Kullanıcı hiçbir şey seçmediyse uyar
     if (userData.conditions.length === 0) {
         alert("Lütfen en az bir saç durumu seçin.");
         return;
@@ -181,18 +185,82 @@ function goToNextFromCondition() {
 
     console.log("Seçilen tüm saç durumları:", userData.conditions);
 
-    // Çoklu seçim ekranının sabit barı olduğu için geçişte onu da gizlemeliyiz
-    document.getElementById('step-condition-female').querySelector('.sticky-action-bar').style.display = 'none';
+    // Geçiş yapıldığında "step-condition-female" div'i gizleneceği için, 
+    // içindeki sabit buton da otomatik gizlenecek. Ekstra koda gerek yok!
     changeScreen('step-condition-female', 'step-refine-female');
 }
 // Adım 9'dan (Refine) sonrasına geçiş
 function goToNextFromRefine() {
     console.log("İnce ayar ekranı geçildi.");
 
-    // Burası 10. Adım (Belki nihai sonuç) hazır olduğunda aktif edilecek
-    alert("Yapay zeka ince ayarı tamamlandı. Nihai sonuç hazırlanıyor (Sırada 10. Adım var)!");
+    // Alerti silip geçişi ekledik
+    changeScreen('step-refine-female', 'step-color-female');
+}
+// Adım 10: Saç rengi seçildiğinde çalışacak
+function selectColorFemale(colorValue) {
+    userData.color = colorValue;
+    console.log("Saç rengi kaydedildi:", userData);
 
-    // changeScreen('step-refine-female', 'step-sonraki-adim');
+    // Alerti silip geçişi ekledik
+    changeScreen('step-color-female', 'step-change-color-female');
+}
+// Adım 11: Renk değiştirme isteği seçildiğinde çalışacak
+// Adım 11'den Adım 12'ye geçiş (Akıllı Dallanma)
+function selectChangeColorFemale(changeValue) {
+    userData.changeColor = changeValue;
+    console.log("Renk değişim isteği kaydedildi:", userData);
+
+    if (changeValue === 'no_just_cut') {
+        // EĞER SADECE KESİM İSTİYORSA RENK SORULARINI ATLA
+        alert("Sadece kesim istendi, Renk Tonları sayfası atlanıyor.\nDoğrudan 'Face Shape' bölümüne geçilecek!");
+        // changeScreen('step-change-color-female', 'step-faceshape-female');
+    } else {
+        // EĞER RENK İSTİYORSA 12. ADIMA (SHADES) GEÇ
+        changeScreen('step-change-color-female', 'step-shades-female');
+    }
+}
+// Adım 12: Çoklu seçim (Renk Tonları) işaretleme fonksiyonu
+function toggleShade(element, shadeValue) {
+    const icon = element.querySelector('.shade-check');
+    const index = userData.shades.indexOf(shadeValue);
+    const nextBtn = document.getElementById('shadesNextBtn');
+
+    if (index === -1) {
+        userData.shades.push(shadeValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        userData.shades.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.shades.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 12'den Face Shape (Yüz Şekli) kategorisine geçiş
+function goToNextFromShades() {
+    if (userData.shades.length === 0) {
+        alert("Lütfen en az bir ton seçin.");
+        return;
+    }
+
+    // Geri dönüldüğünde buton kaybolmasın diye sadece geçiş yapıyoruz (8. adımdaki gibi düzeltilmiş hali)
+    console.log("Seçilen tonlar:", userData.shades);
+
+    // Burası Face Shape adımı hazır olduğunda aktif edilecek
+    alert("Hair Profile tamamlandı!\nSeçilen Tonlar: " + userData.shades.join(', ') + "\n\nSırada yeni kategori var: FACE SHAPE!");
+
+    // changeScreen('step-shades-female', 'step-faceshape-female');
 }
 
 function selectTexture(textureValue) {
