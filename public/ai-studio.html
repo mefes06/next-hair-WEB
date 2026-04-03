@@ -119,6 +119,83 @@
 
         </div>
 
+        <div class="ai-quiz-container fade-in-step" id="step-age-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span style="font-size: 25px; font-weight: 700; display: block; margin-bottom: 10px;">Your
+                    Profile</span>
+                <div
+                    style="width: 150px; height: 4px; background: #eee; border-radius: 2px; margin: 0 auto; overflow: hidden;">
+                    <div style="height: 100%; background: #8b5cf6; width: 15%; transition: width 0.4s ease;"></div>
+                </div>
+            </div>
+
+            <div class="question-header">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 40px; text-align: center;">
+                    What's your age range?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectAge('18-24')">
+                    <span class="selection-text">18-24</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('25-34')">
+                    <span class="selection-text">25-34</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('35-44')">
+                    <span class="selection-text">35-44</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('45-54')">
+                    <span class="selection-text">45-54</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('55+')">
+                    <span class="selection-text">55+</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-quiz-container fade-in-step" id="step-experiment-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span style="font-size: 25px; font-weight: 700; display: block; margin-bottom: 10px;">Your
+                    Profile</span>
+                <div
+                    style="width: 150px; height: 4px; background: #eee; border-radius: 2px; margin: 0 auto; overflow: hidden;">
+                    <div style="height: 100%; background: #8b5cf6; width: 30%; transition: width 0.4s ease;"></div>
+                </div>
+            </div>
+
+            <div class="question-header">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 40px; text-align: center;">
+                    Have you experimented with hairstyles before?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectExperiment('yes_often')">
+                    <span class="selection-text">🎨 Yes, I love changing my look</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectExperiment('sometimes')">
+                    <span class="selection-text">🧐 Sometimes, but not often</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectExperiment('no_never')">
+                    <span class="selection-text">🔒 No, I usually stick to one style</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+
         <div class="ai-quiz-container fade-in-step" id="step-texture" style="display: none;">
 
             <div class="quiz-progress-wrapper">
@@ -157,94 +234,7 @@
         </div>
 
     </div>
-    <script>
-        // Kullanıcı verileri
-        let userData = {
-            gender: '',
-            texture: ''
-        };
-
-        // Kullanıcının geçtiği ekranların geçmişini tutan dizi
-        let stepHistory = ['step-gender'];
-
-        function selectGender(selectedGender) {
-            userData.gender = selectedGender;
-
-            const titleEl = document.getElementById('dynamicTestimonialTitle');
-            const nameEl = document.getElementById('testimonialName');
-            const avatarEl = document.getElementById('testimonialAvatar');
-            const textEl = document.getElementById('testimonialText');
-
-            if (selectedGender === 'male') {
-                // Erkek İçeriği
-                titleEl.innerHTML = 'Over <span class="gold-text">15,000 men</span> have<br>discovered their <span class="gold-text">perfect hairstyle<br>match</span>';
-                nameEl.innerText = 'James, 34';
-                avatarEl.innerText = 'J';
-                avatarEl.style.background = '#e0f2fe'; // James için hafif mavi tonu
-                avatarEl.style.color = '#0284c7';
-                textEl.innerHTML = '"This app showed me I could <strong>pull off a fade before I actually committed</strong> to cutting it. My barber finally understood exactly what I wanted."';
-            } else {
-                // Kadın İçeriği (Sarah)
-                titleEl.innerHTML = 'Over <span class="gold-text">15,000 women</span> have<br>discovered their <span class="gold-text">perfect hairstyle<br>match</span>';
-                nameEl.innerText = 'Sarah, 43';
-                avatarEl.innerText = 'S';
-                avatarEl.style.background = '#f1edff'; // Sarah için orijinal mor tonu
-                avatarEl.style.color = '#8b5cf6';
-                textEl.innerHTML = '"Helps you <strong>rule out all those styles you\'ve often thought about</strong>, and shows you what looks best with YOUR face. It\'s great."';
-            }
-
-            changeScreen('step-gender', 'step-testimonial');
-        }
-
-        // Ekran değiştirme ve geçmişi yönetme fonksiyonu (Tüm adımlarda bunu kullanacağız)
-        function changeScreen(currentStepId, nextStepId) {
-            document.getElementById(currentStepId).style.display = 'none';
-            document.getElementById(nextStepId).style.display = 'block';
-
-            // Yeni ekranı geçmişe ekle
-            stepHistory.push(nextStepId);
-
-            // Artık ilk ekranda değiliz, Geri butonunu göster (flex yapısı için)
-            document.getElementById('backBtn').style.display = 'flex';
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Dinamik Geri Dönüş Fonksiyonu
-        function goBack() {
-            if (stepHistory.length > 1) {
-                // Şu anki ekranı diziden çıkar ve gizle
-                const currentStep = stepHistory.pop();
-                document.getElementById(currentStep).style.display = 'none';
-
-                // Dizide kalan son ekranı (bir öncekini) göster
-                const previousStep = stepHistory[stepHistory.length - 1];
-                document.getElementById(previousStep).style.display = 'block';
-
-                // Eğer en başa (Cinsiyet seçimine) döndüysek geri butonunu tekrar gizle
-                if (stepHistory.length === 1) {
-                    document.getElementById('backBtn').style.display = 'none';
-                }
-            }
-        }
-
-        // Saç dokusu seçimi fonksiyonu
-        function selectTexture(textureValue) {
-            userData.texture = textureValue;
-            console.log("Seçilen Doku:", textureValue);
-
-            // Buraya bir sonraki adımın (Saç Uzunluğu) ID'sini yazacağız
-            // Şimdilik akışı devam ettirmek için:
-            alert("Saç dokusu seçildi: " + textureValue + ". Şimdi Saç Uzunluğu adımına geçiliyor.");
-
-            // changeScreen('step-texture', 'step-length'); // Bir sonraki adım hazır olunca aktif edeceğiz
-        }
-
-        // Yorum ekranındaki CONTINUE butonu artık bu fonksiyonu çağırmalı:
-        function goToNextQuestion() {
-            changeScreen('step-testimonial', 'step-texture');
-        }
-    </script>
+    <script src="ai-script.js"></script>
 </body>
 
 </html>
