@@ -122,11 +122,15 @@
         <div class="ai-quiz-container fade-in-step" id="step-age-female" style="display: none;">
 
             <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
-                <span style="font-size: 25px; font-weight: 700; display: block; margin-bottom: 10px;">Your
+                <span style="font-size: 20px; font-weight: 700; display: block; margin-bottom: 10px;">Your
                     Profile</span>
-                <div
-                    style="width: 150px; height: 4px; background: #eee; border-radius: 2px; margin: 0 auto; overflow: hidden;">
-                    <div style="height: 100%; background: #8b5cf6; width: 15%; transition: width 0.4s ease;"></div>
+                <div style="display: flex; gap: 8px; width: 160px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 33%; transition: width 0.4s ease;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 0%; transition: width 0.4s ease;"></div>
+                    </div>
                 </div>
             </div>
 
@@ -163,11 +167,16 @@
         <div class="ai-quiz-container fade-in-step" id="step-experiment-female" style="display: none;">
 
             <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
-                <span style="font-size: 25px; font-weight: 700; display: block; margin-bottom: 10px;">Your
-                    Profile</span>
-                <div
-                    style="width: 150px; height: 4px; background: #eee; border-radius: 2px; margin: 0 auto; overflow: hidden;">
-                    <div style="height: 100%; background: #8b5cf6; width: 30%; transition: width 0.4s ease;"></div>
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">YOUR
+                    PROFILE</span>
+                <div style="display: flex; gap: 8px; width: 160px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 66%; transition: width 0.4s ease;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 0%; transition: width 0.4s ease;"></div>
+                    </div>
                 </div>
             </div>
 
@@ -192,6 +201,301 @@
                     <span class="selection-text">🔒 No, I usually stick to one style</span>
                     <div class="selection-circle"></div>
                 </div>
+            </div>
+
+        </div>
+
+        <div class="ai-quiz-container fade-in-step" id="step-feelings-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">YOUR
+                    PROFILE</span>
+                <div style="display: flex; gap: 8px; width: 160px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%; transition: width 0.4s ease;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 0%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="question-header">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 40px; text-align: center;">
+                    How do you feel about your current hairstyle?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectFeelings('love_it')">
+                    <span class="selection-text">❤️ Love it, just looking for inspiration</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectFeelings('okay_ready')">
+                    <span class="selection-text">✨ It's okay, but ready for something new</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectFeelings('not_satisfied')">
+                    <span class="selection-text">😫 Not satisfied, need a complete change</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectFeelings('same_for_years')">
+                    <span class="selection-text">🤩 I've had the same style for years</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="ai-quiz-container fade-in-step" id="step-texture-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">HAIR
+                    PROFILE</span>
+                <div style="display: flex; gap: 8px; width: 160px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%; transition: width 0.4s ease;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 20%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 40px; text-align: center;">
+                    What's your natural hair texture?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectTextureFemale('straight')">
+                    <span class="selection-text">➖ Straight</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTextureFemale('wavy')">
+                    <span class="selection-text">〰️ Wavy</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTextureFemale('curly')">
+                    <span class="selection-text">🌀 Curly</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTextureFemale('coily_kinky')">
+                    <span class="selection-text">🧬 Coily / Kinky</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTextureFemale('not_sure')">
+                    <span class="selection-text">🤷‍♀️ Not sure</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-quiz-container fade-in-step" id="step-length-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">HAIR
+                    PROFILE</span>
+                <div style="display: flex; gap: 8px; width: 160px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 40%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 40px; text-align: center;">
+                    What's your current hair length?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectLengthFemale('pixie')">
+                    <span class="selection-text">👦 Pixie / Very short</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectLengthFemale('short')">
+                    <span class="selection-text">💇‍♀️ Short / Above shoulders</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectLengthFemale('medium')">
+                    <span class="selection-text">👱‍♀️ Medium / Shoulder length</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectLengthFemale('long')">
+                    <span class="selection-text">👩🏼‍🦳 Long / Below shoulders</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectLengthFemale('very_long')">
+                    <span class="selection-text">🧝‍♀️ Very long / Waist or longer</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-quiz-container fade-in-step" id="step-thickness-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">HAIR
+                    PROFILE</span>
+                <div style="display: flex; gap: 8px; width: 160px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 60%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 40px; text-align: center;">
+                    How thick is your hair?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectThicknessFemale('fine_thin')">
+                    <span class="selection-text">✦ Fine / Thin</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectThicknessFemale('medium')">
+                    <span class="selection-text">✦✦ Medium</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectThicknessFemale('thick')">
+                    <span class="selection-text">✦✦✦ Thick</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-quiz-container fade-in-step" id="step-condition-female"
+            style="display: none; padding-bottom: 100px;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">HAIR
+                    PROFILE</span>
+                <div style="display: flex; gap: 8px; width: 160px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 80%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header" style="text-align: center; margin-bottom: 30px;">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    What's your hair condition like?</h2>
+                <span style="color: #888; font-size: 15px;">Choose all that apply</span>
+            </div>
+
+            <div class="selection-list" id="condition-list">
+                <div class="selection-item multi-select" onclick="toggleCondition(this, 'healthy')"
+                    style="justify-content: flex-start; gap: 15px;">
+                    <i class="bi bi-square condition-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                    <span class="selection-text">💪 Healthy and strong</span>
+                </div>
+                <div class="selection-item multi-select" onclick="toggleCondition(this, 'dry')"
+                    style="justify-content: flex-start; gap: 15px;">
+                    <i class="bi bi-square condition-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                    <span class="selection-text">🌵 Dry or brittle</span>
+                </div>
+                <div class="selection-item multi-select" onclick="toggleCondition(this, 'oily')"
+                    style="justify-content: flex-start; gap: 15px;">
+                    <i class="bi bi-square condition-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                    <span class="selection-text">💧 Oily / Gets greasy quickly</span>
+                </div>
+                <div class="selection-item multi-select" onclick="toggleCondition(this, 'damaged')"
+                    style="justify-content: flex-start; gap: 15px;">
+                    <i class="bi bi-square condition-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                    <span class="selection-text">🔥 Damaged from heat / color</span>
+                </div>
+                <div class="selection-item multi-select" onclick="toggleCondition(this, 'frizzy')"
+                    style="justify-content: flex-start; gap: 15px;">
+                    <i class="bi bi-square condition-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                    <span class="selection-text">⚡ Frizzy</span>
+                </div>
+                <div class="selection-item multi-select" onclick="toggleCondition(this, 'split_ends')"
+                    style="justify-content: flex-start; gap: 15px;">
+                    <i class="bi bi-square condition-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                    <span class="selection-text">✂️ Split ends</span>
+                </div>
+                <div class="selection-item multi-select" onclick="toggleCondition(this, 'thinning')"
+                    style="justify-content: flex-start; gap: 15px;">
+                    <i class="bi bi-square condition-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                    <span class="selection-text">📉 Thinning / Hair loss</span>
+                </div>
+            </div>
+
+            <div class="sticky-action-bar">
+                <div class="sticky-action-inner">
+                    <button id="conditionNextBtn" class="pill-next-btn" onclick="goToNextFromCondition()" disabled>NEXT
+                        STEP</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-quiz-container fade-in-step" id="step-refine-female" style="display: none; text-align: center;">
+
+            <div class="refine-content" style="max-width: 500px; margin: 0 auto 50px auto;">
+                <h2
+                    style="font-family: 'Lato', sans-serif; font-size: 36px; font-weight: 800; color: #1a2b3c; margin-bottom: 15px;">
+                    Refine Your Timeless Look</h2>
+                <p style="color: #444; font-size: 18px; line-height: 1.6;">
+                    <span style="color: #9b63a6; font-weight: 700;">Let's fine-tune it</span> with small, smart
+                    upgrades.
+                </p>
+            </div>
+
+            <div class="refine-image-wrapper"
+                style="position: relative; max-width: 450px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(155, 99, 166, 0.1);">
+
+                <div class="refine-glow"
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120%; height: 120%; background: radial-gradient(circle, rgba(241, 237, 255, 1) 0%, rgba(255, 255, 255, 0) 70%); z-index: -1;">
+                </div>
+
+                <div class="split-image-container" style="position: relative;">
+                    <div
+                        style="position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 2px; border-left: 2px dashed rgba(255, 255, 255, 0.8); z-index: 10;">
+                    </div>
+
+                    <img src="/uploads/light-young-BqigrWl0.png" alt="AI Hair Refinement"
+                        style="width: 100%; display: block;">
+
+                </div>
+            </div>
+
+            <div style="max-width: 300px; margin: 50px auto 0 auto;">
+                <button class="pill-next-btn" onclick="goToNextFromRefine()"
+                    style="background-color: #b99a6c;">CONTINUE</button>
             </div>
 
         </div>

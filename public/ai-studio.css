@@ -605,3 +605,59 @@ body[data-theme="dark"] .header-back-btn {
 body[data-theme="dark"] .header-progress-track {
     background: #333;
 }
+
+/* --- SABİT ALT BAR (STICKY FOOTER) --- */
+.sticky-action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid #eaeaea;
+    z-index: 1000;
+}
+
+.sticky-action-inner {
+    max-width: 600px;
+    /* Sitenin quiz genişliği */
+    margin: 0 auto;
+}
+
+/* HAP ŞEKLİNDE YENİ NEXT BUTONU */
+.pill-next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 56px;
+    border-radius: 9999px;
+    /* Tam yuvarlak hap şekli */
+    background-color: #c9ac71;
+    /* Projenin gold rengi */
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* BUTON DEVRE DIŞI (DISABLED) İKEN */
+.pill-next-btn:disabled {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* BUTON AKTİFKEN ÜZERİNE GELİNCE */
+.pill-next-btn:not(:disabled):hover {
+    background-color: #b5985d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 172, 113, 0.3);
+}
