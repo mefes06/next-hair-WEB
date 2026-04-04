@@ -599,7 +599,8 @@ function toggleStylingTools(element, toolValue) {
     }
 }
 
-// Adım 25'ten sonraki adıma geçiş
+
+// Adım 25'ten Adım 26'ya (Matches Found) geçiş
 function goToNextFromStylingTools() {
     if (userData.stylingTools.length === 0) {
         alert("Lütfen en az bir araç işaretleyin.");
@@ -608,10 +609,75 @@ function goToNextFromStylingTools() {
 
     console.log("Seçilen şekillendirme araçları:", userData.stylingTools);
 
-    // Burası 26. Adım hazır olduğunda aktif edilecek
-    alert("Araçlar başarıyla kaydedildi! Lifestyle kategorisi bitti.\nSırada 26. Adım var!");
+    // Matches ekranını dinamik verilerle doldur
+    populateMatchesScreen();
 
-    // changeScreen('step-styling-tools-female', 'step-sonraki-adim');
+    // Matches Found ekranına geç
+    changeScreen('step-styling-tools-female', 'step-matches-found');
+}
+
+// Adım 26: Matches ekranını userData'ya göre dinamik doldur
+function populateMatchesScreen() {
+
+    // ---- FACE STRATEGY (Yüz Şekline Göre) ----
+    const faceStrategyMap = {
+        'oval': 'Highlighting your natural balance for your oval face',
+        'round': 'Lengthening & slimming styles for your round face',
+        'square': 'Softening the angles of your strong square jaw',
+        'heart': 'Balancing your forehead for your heart-shaped face',
+        'oblong': 'Adding width & volume for your long face shape',
+        'diamond': 'Playing up your cheekbones for your diamond face',
+        'triangle': 'Framing & lifting the top for your triangle face'
+    };
+
+    // ---- TEXTURE MATCH (Saç Dokusuna Göre) ----
+    const textureMap = {
+        'straight': 'Volume & movement for your sleek straight hair',
+        'wavy': 'Debulking & flow for your thick waves',
+        'curly': 'Shape & definition for your beautiful curls',
+        'coily': 'Moisture-rich styles for your coily texture'
+    };
+
+    // ---- DAILY ROUTINE (Şekillendirme Süresine Göre) ----
+    const routineMap = {
+        '5min': 'Quick wash-and-go styles for your busy mornings',
+        '15min': 'Effortless styles for your 15-minute routine',
+        '30min': 'Rewarding styles for your moderate styling time',
+        '60min': 'Polished looks for your dedicated styling sessions',
+        'varies': 'Flexible styles that adapt to your changing schedule'
+    };
+
+    // ---- PRIMARY GOAL (Hedef Saç Stiline Göre) ----
+    const goalMap = {
+        'fresh_update': 'Modern & fresh updates to your current style',
+        'transform': 'Bold transformation for a whole new look',
+        'maintain': 'Refined tweaks to perfect your signature style',
+        'trend': 'On-trend picks tailored to your features',
+        'confidence': 'Confidence-boosting styles made for you',
+        'low_maintenance': 'Low-maintenance looks that still turn heads'
+    };
+
+    // DOM'a yaz (fallback ile)
+    document.getElementById('match-face-strategy').textContent =
+        faceStrategyMap[userData.faceShape] || 'Personalized strategy for your unique face shape';
+
+    document.getElementById('match-texture').textContent =
+        textureMap[userData.texture] || 'Custom match for your hair texture';
+
+    document.getElementById('match-routine').textContent =
+        routineMap[userData.stylingTime] || 'Styles perfectly suited to your daily routine';
+
+    document.getElementById('match-goal').textContent =
+        goalMap[userData.primaryGoal] || 'Styles fully aligned with your hair goals';
+}
+
+// Adım 26'dan sonraki adıma geçiş (Sonuçlar / Results)
+function goToResults() {
+    console.log("Sonuçlara geçiliyor. Tüm kullanıcı verisi:", userData);
+    // Sonuç sayfasına yönlendir (hazır olduğunda aktif et):
+    // changeScreen('step-matches-found', 'step-results');
+    // Şimdilik: alert ile test
+    alert("🎉 Tebrikler! Profiliniz hazır.\n\nBir sonraki adımda AI try-on sonuçlarınız görüntülenecek.");
 }
 
 function selectTexture(textureValue) {

@@ -662,3 +662,210 @@ body[data-theme="dark"] .header-progress-track {
     box-shadow: 0 4px 12px rgba(201, 172, 113, 0.3);
 }
 
+
+
+/* ============================================================ */
+/* ADIM 26: MATCHES FOUND EKRANI STİLLERİ                      */
+/* ============================================================ */
+
+/* --- Hair Magazine Logo Alanı --- */
+.matches-logo-area {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 8px;
+}
+
+.matches-logo-lockup {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    gap: 0;
+}
+
+.matches-logo-top {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #c9ac71;
+    /* Projenin gold rengi */
+    text-transform: uppercase;
+}
+
+.matches-logo-bottom {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: #1a2b3c;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.05;
+}
+
+.matches-logo-sub {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #aaa;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* --- Hero Kart --- */
+.matches-hero-card {
+    background: #faf9f7;
+    border: 1px solid #ede9e0;
+    border-radius: 20px;
+    padding: 36px 28px 28px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.matches-sparkle-wrap {
+    width: 56px;
+    height: 56px;
+    background: #f3ead8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+}
+
+.matches-sparkle-icon {
+    font-size: 26px;
+    color: #c9ac71;
+}
+
+.matches-hero-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #1a2b3c;
+    line-height: 1.3;
+    margin: 0 0 20px 0;
+}
+
+.matches-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #e8e3d8;
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.analyzed-count {
+    color: #777;
+}
+
+.matches-arrow {
+    color: #aaa;
+}
+
+.top-found {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #1a2b3c;
+    font-weight: 700;
+}
+
+/* --- 4'lü Insight Grid --- */
+.matches-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.match-card {
+    background: #fff;
+    border: 1px solid #ede9e0;
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.match-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+    transform: translateY(-2px);
+}
+
+.match-card-icon-wrap {
+    width: 44px;
+    height: 44px;
+    background: #f1edff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px auto;
+    font-size: 20px;
+    color: #8b5cf6;
+}
+
+.match-card-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #8b5cf6;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.match-card-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* --- Unlock Butonu Özel Rengi --- */
+.matches-unlock-btn {
+    background: linear-gradient(135deg, #c9ac71 0%, #b09050 100%);
+    box-shadow: 0 4px 20px rgba(201, 172, 113, 0.35);
+    font-size: 15px;
+    letter-spacing: 2px;
+}
+
+.matches-unlock-btn:hover {
+    background: linear-gradient(135deg, #b09050 0%, #9a7d40 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201, 172, 113, 0.45);
+}
+
+/* --- Karanlık Mod --- */
+body[data-theme="dark"] .matches-hero-card,
+body[data-theme="dark"] .match-card {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+body[data-theme="dark"] .matches-logo-bottom,
+body[data-theme="dark"] .matches-hero-title {
+    color: #f0f0f0;
+}
+
+body[data-theme="dark"] .match-card-desc {
+    color: #ccc;
+}
+
+body[data-theme="dark"] .matches-count-badge {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #ccc;
+}
+
+body[data-theme="dark"] .top-found {
+    color: #f0f0f0;
+}
