@@ -348,6 +348,70 @@ app.get("/api/hairstyles/:id/related", async (req, res) => {
     }
 });
 
+// --- AI TRY-ON UÇ NOKTASI (PHASE 2 & 3) ---
+
+// AI GÖRÜNTÜ İŞLEME İÇİN ÖZEL GÜVENLİ DEPOLAMA (GEÇİCİ)
+const tempStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const tempDir = path.join(__dirname, "temp_faces");
+        if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+        cb(null, tempDir);
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, 'temp_face_' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+const uploadTemp = multer({ storage: tempStorage });
+
+app.post("/api/ai-tryon", uploadTemp.single('userPhoto'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "Fotoğraf yüklenemedi." });
+        }
+
+        const userDataStr = req.body.userData;
+        let userData = {};
+        if (userDataStr) {
+            userData = JSON.parse(userDataStr);
+        }
+
+        // Prompt Mühendisliği (Mock)
+        const prompt = `A photo of a ${userData.age || 'adult'} ${userData.gender || 'person'} with a ${userData.faceShape || 'oval'} face, wearing a ${userData.color || 'natural'} ${userData.texture || 'straight'} ${userData.length || 'medium'} hairstyle`;
+
+        console.log("\n== AI TRY-ON STARTED ==");
+        console.log("Uploaded File Saved Temporarily At:", req.file.path);
+        console.log("Generated Prompt:", prompt);
+
+        // Faz 3: Yapay Zeka (AI API) Entegrasyonu Mock.
+        // Aslında burada Replicate veya Fal.ai'ye req atıp bekleyeceğiz.
+
+        setTimeout(() => {
+            // İşlem bittikten sonra fotoğrafı güvenle sil (Güvenlik / GDPR kuralı)
+            fs.unlink(req.file.path, (err) => {
+                if (err) console.error("Temp file deletion error:", err);
+                else console.log("Temp face photo securely deleted.\n");
+            });
+
+            // Geriye sahte sonuç dönüyoruz (Mock Data)
+            res.json({
+                success: true,
+                message: "AI analysis and generation complete.",
+                generatedImages: [
+                    "https://images.unsplash.com/photo-1595476108010-b4d1f10c5144?auto=format&fit=crop&w=400&q=80", // Kıvırcık premium portre
+                    "https://images.unsplash.com/photo-1605980776566-0386c9dcfc7d?auto=format&fit=crop&w=400&q=80", // Dalgalı kahverengi
+                    "https://images.unsplash.com/photo-1580618672591-eeb7a59af310?auto=format&fit=crop&w=400&q=80", // Erkek/unisex
+                    "https://images.unsplash.com/photo-1512496015851-a1dcafb1e4ac?auto=format&fit=crop&w=400&q=80"  // Kadın portre
+                ]
+            });
+        }, 4000); // 4 saniyelik yapay zeka bekleme simülasyonu
+
+    } catch (error) {
+        console.error("AI Try-On Error:", error);
+        res.status(500).json({ error: "Sunucu hatası oluştu." });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server çalışıyor: http://localhost:${PORT}`);
 });

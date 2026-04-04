@@ -605,20 +605,7 @@ body[data-theme="dark"] .nav-search-dropdown input:focus {
     font-size: 9px;
 }
 
-/* Karanlık Mod Uyumu*/
-/*body[data-theme="dark"] .read-more {
-    border-color: #666 !important;
-    color: #bbb !important;
-}*/
-/*
-body[data-theme="dark"] .read-more:hover {
-    background-color: #fff !important;
-    /* Dark modda hover olunca beyaz olsun 
-    color: #000 !important;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-}
-
-/*SIDEBAR*/
+/* Karanlık Mod Uyumu kaldırıldı/Temizlendi */
 .widget-title {
     font-size: 15px;
     font-weight: 800;

@@ -1975,8 +1975,157 @@
 
             <div class="sticky-action-bar">
                 <div class="sticky-action-inner">
-                    <button class="pill-next-btn" onclick="goToResults()">NEXT STEP</button>
+                    <button class="pill-next-btn" onclick="goToPhotoUpload()">NEXT STEP</button>
                 </div>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+
+        <!-- ============================================================ -->
+        <!-- ADIM 29: PHOTO UPLOAD                                        -->
+        <!-- ============================================================ -->
+        <div class="ai-quiz-container fade-in-step" id="step-photo-upload" style="display: none; padding-bottom: 150px;">
+            <div class="question-header" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="question-title" style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    You're Almost There ✨
+                </h2>
+                <span class="photo-upload-subtitle" style="color: #666; font-size: 16px; line-height: 1.5; display: inline-block;">
+                    A simple, front-facing photo works best.
+                </span>
+            </div>
+
+            <div class="upload-options-list">
+                <!-- Hidden File Input -->
+                <input type="file" id="user-photo-input" accept="image/jpeg, image/png, image/webp" style="display: none;" onchange="handlePhotoSelection(event)">
+
+                <!-- Open camera -->
+                <button class="upload-option-btn" id="btn-camera" onclick="openCamera()">
+                    <i class="bi bi-camera"></i>
+                    <span>Open camera</span>
+                </button>
+
+                <!-- Select from gallery -->
+                <button class="upload-option-btn" id="btn-gallery" onclick="openGallery()">
+                    <i class="bi bi-images"></i>
+                    <span>Select from Gallery</span>
+                </button>
+                
+                <!-- Feedback message -->
+                <div id="photo-feedback" style="display: none; text-align: center; color: #10b981; font-weight: 600; font-size: 15px; margin-top: 5px;">
+                    <i class="bi bi-check-circle-fill"></i> Photo selected successfully!
+                </div>
+            </div>
+
+            <div class="consent-container">
+                <label class="consent-label">
+                    <input type="checkbox" id="consent-checkbox" onchange="toggleFinishButton()">
+                    <span class="custom-checkbox"><i class="bi bi-check"></i></span>
+                    <span class="consent-text">
+                        I confirm that the person in the image is 18+ years old, I have consent from any identifiable individuals, and the media does not contain illegal, violent, or explicit content.
+                    </span>
+                </label>
+            </div>
+
+            <div class="sticky-action-bar" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="sticky-action-inner" style="width: 100%;">
+                    <button class="pill-next-btn" id="finish-profile-btn" onclick="finishProfile()" disabled>FINISH MY PROFILE</button>
+                </div>
+                <div class="delete-data-notice" style="margin-top: 15px; font-size: 13px; color: #888; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                    <i class="bi bi-lock-fill" style="color: #10b981;"></i>
+                    <span>You can delete all your data anytime</span>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+
+        <!-- ============================================================ -->
+        <!-- ADIM 30: LIVE CAMERA VIEW                                    -->
+        <!-- ============================================================ -->
+        <div class="ai-quiz-container fade-in-step" id="step-live-camera" style="display: none; padding-bottom: 50px;">
+            <div class="question-header" style="text-align: center; margin-bottom: 20px;">
+                <h2 class="question-title" style="font-family: 'Lato', sans-serif; font-size: 28px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    Keep your face inside the oval
+                </h2>
+            </div>
+
+            <div class="camera-wrapper">
+                <video id="live-camera-feed" autoplay playsinline></video>
+                <div class="camera-oval-overlay"></div>
+            </div>
+
+            <div class="camera-actions">
+                <button class="camera-cancel-btn" onclick="closeCamera()">Cancel</button>
+                <button class="camera-capture-btn" onclick="takePhoto()">
+                    <i class="bi bi-camera"></i>
+                </button>
+            </div>
+            
+            <canvas id="camera-canvas" style="display: none;"></canvas>
+        </div>
+        <!-- ============================================================ -->
+
+        <!-- ============================================================ -->
+        <!-- ADIM 30.5: LOADING / ANALYZING SCREEN                        -->
+        <!-- ============================================================ -->
+        <div class="ai-quiz-container fade-in-step" id="step-loading" style="display: none; padding-bottom: 50px; text-align: center;">
+            
+            <div class="circular-progress-container" style="margin: 0 auto 30px; position: relative; width: 140px; height: 140px;">
+                <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="var(--border-color, #f3f4f6)" stroke-width="6"></circle>
+                    <circle id="loading-circle-progress" cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="6" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" style="transition: stroke-dashoffset 0.2s ease;"></circle>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#b4c6a6" />
+                            <stop offset="100%" stop-color="#8b5cf6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div id="loading-percentage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 28px; font-weight: 800; font-family: 'Lato', sans-serif; color: var(--text-color, #1a2b3c);">0%</div>
+            </div>
+
+            <h2 style="font-family: 'Lato', sans-serif; font-size: 20px; font-weight: 800; color: var(--text-color, #1a2b3c); margin-bottom: 35px; max-width: 320px; margin-left: auto; margin-right: auto; line-height: 1.4;">
+                Finding Hairstyles That Match You Perfectly<span class="loading-dots"></span>
+            </h2>
+
+            <div class="loading-checklist" style="text-align: left; max-width: 350px; margin: 0 auto 50px; font-family: 'Lato', sans-serif; font-size: 15px; display: flex; flex-direction: column; gap: 14px;">
+                <div class="checklist-item" id="chk-1" style="color: #9ca3af;"><i class="bi bi-circle" style="width: 24px; display: inline-block;"></i> Analyzing your hair profile...</div>
+                <div class="checklist-item" id="chk-2" style="color: #9ca3af;"><i class="bi bi-circle" style="width: 24px; display: inline-block;"></i> Considering face shape & preferences...</div>
+                <div class="checklist-item" id="chk-3" style="color: #9ca3af;"><i class="bi bi-circle" style="width: 24px; display: inline-block;"></i> Finding perfect styles for you...</div>
+                <div class="checklist-item" id="chk-4" style="color: #9ca3af;"><i class="bi bi-circle" style="width: 24px; display: inline-block;"></i> Preparing style variations...</div>
+                <div class="checklist-item" id="chk-5" style="color: #9ca3af;"><i class="bi bi-circle" style="width: 24px; display: inline-block;"></i> Generating your hairstyles...</div>
+            </div>
+
+            <div class="loading-testimonial" style="background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; max-width: 400px; margin: 0 auto; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                <div style="color: #10b981; font-size: 15px; margin-bottom: 10px;">
+                    <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+                </div>
+                <p style="font-style: italic; color: #4b5563; font-size: 14px; margin-bottom: 12px; line-height: 1.5;">
+                    "This is the best hairstyle tester I've come across. The hairstyles, for the most part, looked very realistic on my face."
+                </p>
+                <div style="font-weight: 600; color: #6b7280; font-size: 13px;">— Kiri Moran</div>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+
+        <!-- ============================================================ -->
+        <!-- ============================================================ -->
+        <div class="ai-quiz-container fade-in-step" id="step-results" style="display: none; padding-bottom: 50px;">
+            <div class="question-header" style="margin-bottom: 30px; text-align: center;">
+                <h1 class="question-title" style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 800; color: #1a2b3c; margin-bottom: 15px;">
+                    Your AI Makeover Ready
+                </h1>
+                <p style="color: #6b7280; font-size: 16px; font-family: 'Lato', sans-serif;">
+                    Perfect! Here are your custom generated hairstyles based on your profile shape and texture.
+                </p>
+            </div>
+
+            <div class="results-grid" id="ai-results-grid">
+                <!-- Images will be injected here dynamically -->
+            </div>
+
+            <div class="results-actions" style="margin-top: 40px; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                <button class="pill-next-btn" style="width: 100%; max-width: 400px;" onclick="window.location.reload()">TRY ANOTHER STYLE</button>
+                <button class="quiz-option" style="width: 100%; max-width: 400px; text-align: center; justify-content: center; font-weight: 600;" onclick="window.location.href='/'">GO TO HOME</button>
             </div>
         </div>
         <!-- ============================================================ -->

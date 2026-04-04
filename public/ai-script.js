@@ -681,13 +681,282 @@ function goToPhotoIntro() {
     changeScreen('step-style-directions', 'step-photo-intro');
 }
 
-// Adım 28'den sonraki adıma geçiş (Sonuçlar / Results)
-function goToResults() {
-    console.log("Sonuçlara geçiliyor. Tüm kullanıcı verisi:", userData);
-    // Sonuç sayfasına yönlendir (hazır olduğunda aktif et):
-    // changeScreen('step-photo-intro', 'step-results');
-    // Şimdilik: alert ile test
-    alert("🎉 Tebrikler! Profiliniz hazır.\n\nBir sonraki adımda AI try-on sonuçlarınız görüntülenecek.");
+// Adım 28'den Adım 29'a (Photo Upload) geçiş
+function goToPhotoUpload() {
+    changeScreen('step-photo-intro', 'step-photo-upload');
+}
+
+let selectedPhotoFile = null;
+let localStream = null;
+
+async function openCamera() {
+    try {
+        localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+        const video = document.getElementById("live-camera-feed");
+        video.srcObject = localStream;
+        
+        changeScreen('step-photo-upload', 'step-live-camera');
+    } catch (err) {
+        console.error("Camera access denied or error:", err);
+        alert("Camera access denied. Please allow permissions or use 'Select from Gallery'.");
+    }
+}
+
+function closeCamera() {
+    if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+        localStream = null;
+    }
+    goBack(); // Return to photo upload screen
+}
+
+function takePhoto() {
+    const video = document.getElementById("live-camera-feed");
+    const canvas = document.getElementById("camera-canvas");
+    
+    if(!video.videoWidth) return; // Prevent capture if video isn't ready
+    
+    // Set canvas dimensions
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    
+    // Mirror the image horizontally to match the mirrored feed
+    ctx.translate(canvas.width, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    // Convert to Blob and then File object
+    canvas.toBlob((blob) => {
+        if(blob) {
+            const file = new File([blob], "camera_capture.jpg", { type: "image/jpeg" });
+            selectedPhotoFile = file;
+            
+            // Show Feedback
+            document.getElementById("photo-feedback").style.display = "block";
+            
+            // Style Active Camera Button
+            const btnCamera = document.getElementById("btn-camera");
+            btnCamera.style.borderColor = "#10b981";
+            btnCamera.style.color = "#10b981";
+            const iconCam = btnCamera.querySelector("i");
+            if(iconCam) iconCam.style.color = "#10b981";
+            
+            // Reset Gallery Button
+            const btnGallery = document.getElementById("btn-gallery");
+            btnGallery.style.borderColor = "#eaeaea";
+            btnGallery.style.color = "#555";
+            const iconGal = btnGallery.querySelector("i");
+            if(iconGal) iconGal.style.color = "#9ca3af";
+            
+            console.log("Camera photo captured!");
+            closeCamera();
+        }
+    }, "image/jpeg", 0.9);
+}
+
+function openGallery() {
+    const input = document.getElementById("user-photo-input");
+    input.removeAttribute('capture');
+    input.click();
+}
+
+function handlePhotoSelection(event) {
+    const file = event.target.files[0];
+    if(file) {
+        selectedPhotoFile = file;
+        document.getElementById("photo-feedback").style.display = "block";
+        
+        // Style Active Gallery Button
+        const btnGallery = document.getElementById("btn-gallery");
+        btnGallery.style.borderColor = "#10b981";
+        btnGallery.style.color = "#10b981";
+        const iconGal = btnGallery.querySelector("i");
+        if(iconGal) iconGal.style.color = "#10b981";
+        
+        // Reset Camera Button
+        const btnCamera = document.getElementById("btn-camera");
+        btnCamera.style.borderColor = "#eaeaea";
+        btnCamera.style.color = "#555";
+        const iconCam = btnCamera.querySelector("i");
+        if(iconCam) iconCam.style.color = "#9ca3af";
+        
+        console.log("Gallery photo selected:", file.name);
+    }
+}
+
+function toggleFinishButton() {
+    const isChecked = document.getElementById("consent-checkbox").checked;
+    const finishBtn = document.getElementById("finish-profile-btn");
+    finishBtn.disabled = !isChecked;
+}
+
+// Adım 29'dan sonraki adıma geçiş (Sonuçlar / Results)
+let loadingInterval = null;
+
+async function finishProfile() {
+    if(!document.getElementById("consent-checkbox").checked) return;
+    
+    if(!selectedPhotoFile) {
+        alert("Please select a photo or open the camera first.");
+        return;
+    }
+    
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn) backBtn.style.display = 'none';
+
+    // Loading Ekranına Geç
+    changeScreen('step-photo-upload', 'step-loading');
+    startLoadingAnimation();
+    
+    // FormData Oluşturma 
+    const formData = new FormData();
+    formData.append('userPhoto', selectedPhotoFile);
+    formData.append('userData', JSON.stringify(userData));
+
+    try {
+        // Backend'e İstek At
+        const response = await fetch('/api/ai-tryon', { 
+            method: 'POST', 
+            body: formData 
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            console.log("AI Sonuçları geldi:", data);
+            
+            // Popülasyon (Results Grid Dinamik İçerik)
+            const grid = document.getElementById("ai-results-grid");
+            grid.innerHTML = ""; 
+            
+            if (data.generatedImages && data.generatedImages.length > 0) {
+                data.generatedImages.forEach((imgUrl, idx) => {
+                    grid.innerHTML += `
+                        <div class="result-card">
+                            <img src="${imgUrl}" alt="AI Generated Hairstyle ${idx+1}" loading="lazy">
+                            <button class="result-download-btn" onclick="downloadImage('${imgUrl}', 'my-ai-hairstyle-${idx+1}.jpg')" title="Download">
+                                <i class="bi bi-download"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+            }
+
+            // Animasyon tamamen dolsun ve sonuç ekranını açsın
+            completeLoadingAnimation();
+            setTimeout(() => {
+                changeScreen('step-loading', 'step-results');
+            }, 600); // UI 100% gösterim süresi
+            
+        } else {
+             throw new Error(data.error || "Bilinmeyen API hatası");
+        }
+    } catch (error) {
+        console.error("AI yükleme hatası:", error);
+        clearInterval(loadingInterval);
+        alert("Yükleme sırasında hata oluştu: " + error.message);
+        changeScreen('step-loading', 'step-photo-upload');
+        if (backBtn) backBtn.style.display = 'flex';
+    }
+}
+
+// Yükleme Animasyonları
+function updateChecklistItem(idStr, status) {
+    const el = document.getElementById(idStr);
+    if(!el) return;
+    const icon = el.querySelector("i");
+    const isDark = document.body.getAttribute("data-theme") === "dark";
+    
+    if(status === "pending") {
+        el.style.color = "#9ca3af";
+        if(icon) {
+            icon.className = "bi bi-circle";
+            icon.style.animation = "none";
+            icon.style.color = "inherit";
+        }
+    } else if (status === "active") {
+        el.style.color = "#8b5cf6";
+        if(icon) {
+            icon.className = "bi bi-arrow-repeat";
+            icon.style.animation = "spin 1s linear infinite";
+            icon.style.color = "inherit";
+        }
+    } else if (status === "done") {
+        el.style.color = isDark ? "#d1d5db" : "#4b5563";
+        if(icon) {
+            icon.className = "bi bi-check2";
+            icon.style.animation = "none";
+            icon.style.color = "#8b5cf6"; // Purple tick
+        }
+    }
+}
+
+function startLoadingAnimation() {
+    let progress = 0;
+    const progressText = document.getElementById("loading-percentage");
+    const progressCircle = document.getElementById("loading-circle-progress");
+    const totalCircumference = 283; 
+    
+    // Checklist reset
+    for(let i=1; i<=5; i++) updateChecklistItem("chk-" + i, "pending");
+    
+    let checklistIndex = 1;
+    
+    if(loadingInterval) clearInterval(loadingInterval);
+    loadingInterval = setInterval(() => {
+        if(progress < 96) {
+            progress += Math.floor(Math.random() * 3) + 1; 
+            if(progress > 96) progress = 96; // Maks 96da takılsın API dönene kadar
+            
+            progressText.innerText = progress + "%";
+            progressCircle.style.strokeDashoffset = totalCircumference - ((progress / 100) * totalCircumference);
+            
+            // Checkmark update (Her %20'de bir adım)
+            const expectedIndex = Math.floor(progress / 20) + 1; 
+            if(expectedIndex > checklistIndex && checklistIndex <= 5) {
+                if(checklistIndex > 1) updateChecklistItem("chk-" + (checklistIndex - 1), "done");
+                if(checklistIndex <= 5) updateChecklistItem("chk-" + checklistIndex, "active");
+                checklistIndex++;
+            }
+        }
+    }, 120);
+}
+
+function completeLoadingAnimation() {
+    if(loadingInterval) clearInterval(loadingInterval);
+    const progressText = document.getElementById("loading-percentage");
+    const progressCircle = document.getElementById("loading-circle-progress");
+    const totalCircumference = 283;
+    
+    progressText.innerText = "100%";
+    progressCircle.style.strokeDashoffset = 0;
+    
+    for(let i=1; i<=5; i++) {
+        updateChecklistItem("chk-" + i, "done");
+    }
+}
+
+// Resim İndirme Aracı (Blob/Fetch yöntemiyle cors aşımı için)
+async function downloadImage(imageSrc, name) {
+    try {
+        const response = await fetch(imageSrc);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        
+        // Temizlik
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    } catch (err) {
+        console.error("İndirme hatası:", err);
+        alert("Tarayıcınız güvenlik (CORS) nedeniyle bu resmi doğrudan indiremiyor. Resmi basılı tutup veya sağ tıklayıp 'Farklı Kaydet' diyerek indirebilirsiniz.");
+    }
 }
 
 function selectTexture(textureValue) {
