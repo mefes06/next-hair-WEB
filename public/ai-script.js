@@ -19,6 +19,12 @@ let userData = {
     primaryGoal: '',
     appealingStyles: [],
     targetLength: '',
+    styleElements: [],
+    stylingTime: '',
+    washFrequency: '', // YENİ EKLENDİ
+    typicalLifestyle: [],
+    climate: '',
+    stylingTools: [],
     goal: '',
     avoid: '',
     styles: '',
@@ -445,15 +451,167 @@ function goToNextFromStyles() {
     changeScreen('step-styles-female', 'step-target-length-female');
 }
 
-// Adım 19: Hedeflenen Uzunluk seçildiğinde çalışacak (Tekli Seçim)
+// Adım 19'dan Adım 20'ye geçiş
 function selectTargetLengthFemale(lengthValue) {
     userData.targetLength = lengthValue;
     console.log("Hedeflenen uzunluk kaydedildi:", userData);
-    
-    // Burası 20. Adım hazır olduğunda aktif edilecek
-    alert("Uzunluk seçildi: " + lengthValue + ". Sırada 20. Adım var!");
-    
-    // changeScreen('step-target-length-female', 'step-sonraki-adim');
+
+    // Geçişi aktif ettik
+    changeScreen('step-target-length-female', 'step-style-elements-female');
+}
+
+// Adım 20: Çoklu seçim (Stil Elementleri) işaretleme fonksiyonu
+function toggleStyleElement(element, elementValue) {
+    const icon = element.querySelector('.element-check');
+    const index = userData.styleElements.indexOf(elementValue);
+    const nextBtn = document.getElementById('styleElementsNextBtn');
+
+    if (index === -1) {
+        // Seçildiyse
+        userData.styleElements.push(elementValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        // Seçim kaldırıldıysa
+        userData.styleElements.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.styleElements.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 20'den Adım 21'e geçiş
+function goToNextFromStyleElements() {
+    if (userData.styleElements.length === 0) {
+        alert("Lütfen en az bir stil detayı işaretleyin.");
+        return;
+    }
+
+    console.log("Seçilen stil detayları:", userData.styleElements);
+
+    // Geçişi aktif ettik
+    changeScreen('step-style-elements-female', 'step-styling-time-female');
+}
+// Adım 21'den Adım 22'ye geçiş
+function selectStylingTimeFemale(timeValue) {
+    userData.stylingTime = timeValue;
+    console.log("Şekillendirme süresi kaydedildi:", userData);
+
+    // Geçişi aktif ettik
+    changeScreen('step-styling-time-female', 'step-wash-frequency-female');
+}
+// Adım 22'den Adım 23'e geçiş
+function selectWashFrequencyFemale(frequencyValue) {
+    userData.washFrequency = frequencyValue;
+    console.log("Yıkama sıklığı kaydedildi:", userData);
+
+    // Geçişi aktif ettik
+    changeScreen('step-wash-frequency-female', 'step-typical-lifestyle-female');
+}
+// Adım 23: Çoklu seçim (Tipik Yaşam Tarzı) işaretleme fonksiyonu
+function toggleTypicalLifestyle(element, lifestyleValue) {
+    const icon = element.querySelector('.typical-check');
+    const index = userData.typicalLifestyle.indexOf(lifestyleValue);
+    const nextBtn = document.getElementById('typicalLifestyleNextBtn');
+
+    if (index === -1) {
+        // Seçildiyse
+        userData.typicalLifestyle.push(lifestyleValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        // Seçim kaldırıldıysa
+        userData.typicalLifestyle.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.typicalLifestyle.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 23'ten Adım 24'e geçiş
+function goToNextFromTypicalLifestyle() {
+    if (userData.typicalLifestyle.length === 0) {
+        alert("Lütfen en az bir yaşam tarzı işaretleyin.");
+        return;
+    }
+
+    console.log("Seçilen tipik yaşam tarzları:", userData.typicalLifestyle);
+
+    // Geçişi aktif ettik (Sabit bar sayfa değişince otomatik gizlenecek)
+    changeScreen('step-typical-lifestyle-female', 'step-climate-female');
+}
+// Adım 24'ten Adım 25'e geçiş
+function selectClimateFemale(climateValue) {
+    userData.climate = climateValue;
+    console.log("İklim kaydedildi:", userData);
+
+    // Geçişi aktif ettik
+    changeScreen('step-climate-female', 'step-styling-tools-female');
+}
+
+// Adım 25: Çoklu seçim (Şekillendirme Araçları) işaretleme fonksiyonu
+function toggleStylingTools(element, toolValue) {
+    const icon = element.querySelector('.tools-check');
+    const index = userData.stylingTools.indexOf(toolValue);
+    const nextBtn = document.getElementById('stylingToolsNextBtn');
+
+    if (index === -1) {
+        // Seçildiyse
+        userData.stylingTools.push(toolValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        // Seçim kaldırıldıysa
+        userData.stylingTools.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.stylingTools.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 25'ten sonraki adıma geçiş
+function goToNextFromStylingTools() {
+    if (userData.stylingTools.length === 0) {
+        alert("Lütfen en az bir araç işaretleyin.");
+        return;
+    }
+
+    console.log("Seçilen şekillendirme araçları:", userData.stylingTools);
+
+    // Burası 26. Adım hazır olduğunda aktif edilecek
+    alert("Araçlar başarıyla kaydedildi! Lifestyle kategorisi bitti.\nSırada 26. Adım var!");
+
+    // changeScreen('step-styling-tools-female', 'step-sonraki-adim');
 }
 
 function selectTexture(textureValue) {
