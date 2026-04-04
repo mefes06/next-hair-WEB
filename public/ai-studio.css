@@ -869,3 +869,228 @@ body[data-theme="dark"] .matches-count-badge {
 body[data-theme="dark"] .top-found {
     color: #f0f0f0;
 }
+
+/* ============================================================ */
+/* ADIM 27: STYLE DIRECTIONS EKRANI STİLLERİ                   */
+/* ============================================================ */
+
+.style-directions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 0 5px;
+}
+
+.direction-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 24px 20px 20px 20px;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.direction-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.direction-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.direction-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.direction-icon-wrap {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.direction-text h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a2b3c;
+    font-family: 'Lato', sans-serif;
+}
+
+.direction-text p {
+    margin: 0;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Karanlık Mod */
+body[data-theme="dark"] .direction-card {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+body[data-theme="dark"] .direction-text h3 {
+    color: #f0f0f0;
+}
+
+body[data-theme="dark"] .direction-text p {
+    color: #ccc;
+}
+
+/* ============================================================ */
+/* ADIM 28: PHOTO INTRO EKRANI STİLLERİ                         */
+/* ============================================================ */
+
+.photo-scan-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.photo-scan-wrapper {
+    position: relative;
+    width: 320px;
+    height: 380px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.scan-base-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.scan-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #a855f7;
+    /* Purple scan line */
+    box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
+    animation: scanAnimation 3s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes scanAnimation {
+    0% {
+        top: 0%;
+    }
+
+    50% {
+        top: 100%;
+    }
+
+    100% {
+        top: 0%;
+    }
+}
+
+.scan-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: dotPulse 2s infinite ease-in-out;
+}
+
+/* Position mapping to look like face landmarks */
+.dot-1 {
+    top: 30%;
+    left: 30%;
+    animation-delay: 0.1s;
+}
+
+.dot-2 {
+    top: 32%;
+    right: 28%;
+    animation-delay: 0.5s;
+}
+
+.dot-3 {
+    top: 48%;
+    left: 20%;
+    animation-delay: 0.9s;
+}
+
+.dot-4 {
+    top: 49%;
+    right: 18%;
+    animation-delay: 1.2s;
+}
+
+.dot-5 {
+    top: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 1.5s;
+}
+
+.dot-6 {
+    top: 68%;
+    left: 30%;
+    animation-delay: 1.1s;
+}
+
+.dot-7 {
+    top: 68%;
+    right: 30%;
+    animation-delay: 1.3s;
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Karanlık Mod */
+body[data-theme="dark"] .photo-intro-subtitle {
+    color: #bbb !important;
+}

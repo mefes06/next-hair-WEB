@@ -1866,12 +1866,118 @@
             <!-- Sticky Unlock Butonu -->
             <div class="sticky-action-bar">
                 <div class="sticky-action-inner">
-                    <button class="pill-next-btn matches-unlock-btn" onclick="goToResults()">
+                    <button class="pill-next-btn matches-unlock-btn" onclick="goToStyleDirections()">
                         <i class="bi bi-lock-fill" style="margin-right: 8px;"></i> UNLOCK MY RESULTS
                     </button>
                 </div>
             </div>
 
+        </div>
+        <!-- ============================================================ -->
+        
+        <!-- ============================================================ -->
+        <!-- ADIM 27: STYLE DIRECTIONS                                    -->
+        <!-- ============================================================ -->
+        <div class="ai-quiz-container fade-in-step" id="step-style-directions" style="display: none; padding-bottom: 120px;">
+            <div class="question-header" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="question-title" style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    Your top 3 style directions
+                </h2>
+                <span style="color: #888; font-size: 15px;">Next, we'll tailor them to you</span>
+            </div>
+
+            <div class="style-directions-list">
+                <!-- Card 1 -->
+                <div class="direction-card">
+                    <div class="direction-badge" style="color: #d97706; background: #fef3c7;">SOFT VOLUME</div>
+                    <div class="direction-content">
+                        <div class="direction-icon-wrap" style="background: #fffbeb; color: #d97706;">
+                            <i class="bi bi-scissors"></i>
+                        </div>
+                        <div class="direction-text">
+                            <h3>Long Layers with Curtain Bangs</h3>
+                            <p>Adds movement and frames your face, enhancing your cheekbones beautifully.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="direction-card">
+                    <div class="direction-badge" style="color: #059669; background: #d1fae5;">TIMELESS STYLE</div>
+                    <div class="direction-content">
+                        <div class="direction-icon-wrap" style="background: #ecfdf5; color: #059669;">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <div class="direction-text">
+                            <h3>Asymmetrical Lob</h3>
+                            <p>A chic, modern cut that adds volume and flatters your round face.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="direction-card">
+                    <div class="direction-badge" style="color: #9333ea; background: #f3e8ff;">COOL RED TONES</div>
+                    <div class="direction-content">
+                        <div class="direction-icon-wrap" style="background: #faf5ff; color: #9333ea;">
+                            <i class="bi bi-stars"></i>
+                        </div>
+                        <div class="direction-text">
+                            <h3>Long Layers with Copper Balayage</h3>
+                            <p>The warm tones add vibrancy and dimension, creating a youthful glow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sticky-action-bar">
+                <div class="sticky-action-inner">
+                    <button class="pill-next-btn" onclick="goToPhotoIntro()">NEXT STEP</button>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+
+        <!-- ============================================================ -->
+        <!-- ADIM 28: PHOTO INTRO                                         -->
+        <!-- ============================================================ -->
+        <div class="ai-quiz-container fade-in-step" id="step-photo-intro" style="display: none; padding-bottom: 120px;">
+            <div class="question-header" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="question-title" style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    One quick photo
+                </h2>
+                <span class="photo-intro-subtitle" style="color: #666; font-size: 16px; line-height: 1.5; display: inline-block; max-width: 400px;">
+                    This helps us avoid recommending styles that don't suit you.
+                </span>
+            </div>
+
+            <div class="photo-scan-container">
+                <div class="photo-scan-wrapper">
+                    <!-- Base Image -->
+                    <img src="/uploads/light-young-BqigrWl0.png" alt="Face Scanned" class="scan-base-img" style="width: 100%; border-radius: 12px; display: block;" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400';">
+                    
+                    <!-- Scanline & Dots Animation Container -->
+                    <div class="scan-overlay">
+                        <!-- Scanning Line -->
+                        <div class="scan-line"></div>
+                        
+                        <!-- Floating Dots -->
+                        <div class="scan-dot dot-1"></div>
+                        <div class="scan-dot dot-2"></div>
+                        <div class="scan-dot dot-3"></div>
+                        <div class="scan-dot dot-4"></div>
+                        <div class="scan-dot dot-5"></div>
+                        <div class="scan-dot dot-6"></div>
+                        <div class="scan-dot dot-7"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sticky-action-bar">
+                <div class="sticky-action-inner">
+                    <button class="pill-next-btn" onclick="goToResults()">NEXT STEP</button>
+                </div>
+            </div>
         </div>
         <!-- ============================================================ -->
 

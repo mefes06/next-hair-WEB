@@ -671,11 +671,21 @@ function populateMatchesScreen() {
         goalMap[userData.primaryGoal] || 'Styles fully aligned with your hair goals';
 }
 
-// Adım 26'dan sonraki adıma geçiş (Sonuçlar / Results)
+// Adım 26'dan Adım 27'ye (Style Directions) geçiş
+function goToStyleDirections() {
+    changeScreen('step-matches-found', 'step-style-directions');
+}
+
+// Adım 27'den Adım 28'e (Photo Intro) geçiş
+function goToPhotoIntro() {
+    changeScreen('step-style-directions', 'step-photo-intro');
+}
+
+// Adım 28'den sonraki adıma geçiş (Sonuçlar / Results)
 function goToResults() {
     console.log("Sonuçlara geçiliyor. Tüm kullanıcı verisi:", userData);
     // Sonuç sayfasına yönlendir (hazır olduğunda aktif et):
-    // changeScreen('step-matches-found', 'step-results');
+    // changeScreen('step-photo-intro', 'step-results');
     // Şimdilik: alert ile test
     alert("🎉 Tebrikler! Profiliniz hazır.\n\nBir sonraki adımda AI try-on sonuçlarınız görüntülenecek.");
 }
