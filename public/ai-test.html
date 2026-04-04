@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hair Studio - Next Hair</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ai-studio.css">
+
+    <style>
+        /* ── Yardımcı sınıflar (inline style yerine) ─────────────────── */
+        .step-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a2b3c;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .step-subtitle {
+            color: #888;
+            font-size: 15px;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        .gold-btn {
+            background-color: #b99a6c;
+        }
+
+        /* ── İlerleme çubuğu ────────────────────────────────────────── */
+        .progress-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .progress-header-label {
+            font-size: 20px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .progress-bars {
+            display: flex;
+            gap: 8px;
+            width: 160px;
+            margin: 0 auto;
+            height: 5px;
+        }
+
+        .progress-bar-track {
+            flex: 1;
+            background: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: #8b5cf6;
+            transition: width 0.4s ease;
+        }
+
+        /* ── Çoklu seçim kutucukları ─────────────────────────────────── */
+        .multi-check-item {
+            justify-content: flex-start;
+            gap: 15px;
+        }
+
+        .check-icon {
+            color: #8b5cf6;
+            font-size: 22px;
+        }
+
+        /* ── Renk noktaları ─────────────────────────────────────────── */
+        .color-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ── Refine bölümü ──────────────────────────────────────────── */
+        .refine-body {
+            max-width: 500px;
+            margin: 0 auto 50px auto;
+        }
+
+        .refine-body h2 {
+            font-family: 'Lato', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #1a2b3c;
+            margin-bottom: 15px;
+        }
+
+        .refine-body p {
+            color: #444;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .refine-highlight {
+            color: #9b63a6;
+            font-weight: 700;
+        }
+
+        .refine-image-wrap {
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(155, 99, 166, 0.1);
+        }
+
+        .refine-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(241, 237, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: -1;
+        }
+
+        .refine-divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            border-left: 2px dashed rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+
+        .refine-btn-wrap {
+            max-width: 300px;
+            margin: 50px auto 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════ HEADER ════════════════════ -->
+    <header class="top-header ai-studio-header">
+        <div class="container" style="display:flex; justify-content:center;">
+            <button id="backBtn" class="header-back-btn" onclick="goBack()" style="display:none;">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <div class="logo-area center-text">
+                <h1 class="site-logo" style="margin:0;"><a href="/">Next Hair</a></h1>
+                <span class="site-slogan" style="display:block; font-size:14px; margin-top:5px;">AI Studio</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="ai-studio-wrapper">
+
+        <!-- ════════════════════ ADIM 1: CİNSİYET ════════════════════ -->
+        <div class="ai-quiz-container" id="step-gender" style="display:block;">
+            <div class="quiz-header">
+                <h2>Find Your Best<br>Hairstyle Yet ✨</h2>
+                <p>Personalized hairstyle picks based on your features<br>— with instant AI try-on.</p>
+                <div class="quiz-badge">3-MINUTE QUIZ</div>
+            </div>
+
+            <div class="gender-cards-wrapper">
+                <div class="gender-card" onclick="selectGender('female')">
+                    <div class="card-bg"></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Woman" class="person-img">
+                    <div class="card-label">Woman <i class="bi bi-arrow-right"></i></div>
+                </div>
+                <div class="gender-card" onclick="selectGender('male')">
+                    <div class="card-bg"></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="Man" class="person-img">
+                    <div class="card-label">Man <i class="bi bi-arrow-right"></i></div>
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <a href="#" class="how-it-works"><i class="bi bi-info-circle"></i> How It Works?</a>
+                <div class="trust-section">
+                    <div class="avatars">
+                        <img src="https://i.pravatar.cc/100?img=1" alt="user">
+                        <img src="https://i.pravatar.cc/100?img=5" alt="user">
+                        <img src="https://i.pravatar.cc/100?img=9" alt="user">
+                        <img src="https://i.pravatar.cc/100?img=10" alt="user">
+                    </div>
+                    <span>Trusted by 15,000+ women</span>
+                </div>
+                <p class="terms-text">
+                    By continuing, You agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy
+                        Policy</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 2: YORUM ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-testimonial" style="display:none;">
+            <div class="testimonial-header">
+                <h2 id="dynamicTestimonialTitle">
+                    Over <span class="gold-text">15,000 women</span> have<br>
+                    discovered their <span class="gold-text">perfect hairstyle<br>match</span>
+                </h2>
+            </div>
+
+            <div class="review-card">
+                <div class="review-top">
+                    <div class="reviewer-profile">
+                        <div class="avatar-circle" id="testimonialAvatar">S</div>
+                        <span class="reviewer-name" id="testimonialName">Sarah, 43</span>
+                        <span class="verified-badge"><i class="bi bi-check-circle-fill"></i> Verified</span>
+                    </div>
+                    <div class="review-stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                </div>
+                <p class="review-text" id="testimonialText">
+                    "Helps you rule out all those styles you've often thought about, and shows you what looks best with
+                    YOUR face. It's great."
+                </p>
+            </div>
+
+            <div class="stats-list">
+                <div class="stat-item">
+                    <i class="bi bi-person"></i>
+                    <span><strong>450+ users</strong> have found their ideal style today.</span>
+                </div>
+                <div class="stat-item">
+                    <i class="bi bi-chat-square-quote"></i>
+                    <span>Trusted by over <strong>15,000</strong> satisfied clients.</span>
+                </div>
+            </div>
+
+            <button class="gold-continue-btn" onclick="goToNextQuestion()">CONTINUE</button>
+
+            <div class="featured-in-section">
+                <p>As featured in</p>
+                <div class="featured-logos">
+                    <span class="f-logo yahoo-logo">yahoo!</span>
+                    <span class="f-logo bustle-logo">Bustle</span>
+                    <span class="f-logo huffpost-logo">HUFFPOST</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 3: YAŞ ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-age-female" style="display:none;">
+
+            <!-- İlerleme çubuğu -->
+            <div class="progress-header">
+                <span class="progress-header-label">Your Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:33%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">What's your age range?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectAge('18-24')"><span class="selection-text">18-24</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('25-34')"><span class="selection-text">25-34</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('35-44')"><span class="selection-text">35-44</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('45-54')"><span class="selection-text">45-54</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectAge('55+')"><span class="selection-text">55+</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 4: DENEYİM ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-experiment-female" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-header-label">Your Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:66%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">Have you experimented with hairstyles before?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectExperiment('yes_often')"> <span class="selection-text">🎨
+                        Yes, I love changing my look</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectExperiment('sometimes')"> <span class="selection-text">🧐
+                        Sometimes, but not often</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectExperiment('no_never')"> <span class="selection-text">🔒 No,
+                        I usually stick to one style</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 5: HİSSEDİŞ ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-feelings-female" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-header-label">Your Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">How do you feel about your current hairstyle?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectFeelings('love_it')"><span class="selection-text">❤️ Love it,
+                        just looking for inspiration</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectFeelings('okay_ready')"><span class="selection-text">✨ It's
+                        okay, but ready for something new</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectFeelings('not_satisfied')"><span class="selection-text">😫
+                        Not satisfied, need a complete change</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectFeelings('same_for_years')"><span class="selection-text">🤩
+                        I've had the same style for years</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 6: DOKU ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-texture-female" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-header-label">Hair Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:14%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">What's your natural hair texture?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectTextureFemale('straight')"><span class="selection-text">➖
+                        Straight</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectTextureFemale('wavy')"><span class="selection-text">〰️
+                        Wavy</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectTextureFemale('curly')"><span class="selection-text">🌀
+                        Curly</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectTextureFemale('coily_kinky')"><span class="selection-text">🧬
+                        Coily / Kinky</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectTextureFemale('not_sure')"><span class="selection-text">🤷‍♀️
+                        Not sure</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 7: UZUNLUK ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-length-female" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-header-label">Hair Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:28%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">What's your current hair length?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectLengthFemale('pixie')"><span class="selection-text">👦 Pixie
+                        / Very short</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectLengthFemale('short')"><span class="selection-text">💇‍♀️
+                        Short / Above shoulders</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectLengthFemale('medium')"><span class="selection-text">👱‍♀️
+                        Medium / Shoulder length</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectLengthFemale('long')"><span class="selection-text">👩🏼‍🦳
+                        Long / Below shoulders</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectLengthFemale('very_long')"><span class="selection-text">🧝‍♀️
+                        Very long / Waist or longer</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 8: KALINLIK ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-thickness-female" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-header-label">Hair Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:42%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">How thick is your hair?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectThicknessFemale('fine_thin')"><span class="selection-text">✦
+                        Fine / Thin</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectThicknessFemale('medium')"><span class="selection-text">✦✦
+                        Medium</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectThicknessFemale('thick')"><span class="selection-text">✦✦✦
+                        Thick</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 9: DURUM (çoklu seçim) ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-condition-female"
+            style="display:none; padding-bottom:100px;">
+            <div class="progress-header">
+                <span class="progress-header-label">Hair Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:56%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-text" style="margin-bottom:30px;">
+                <h2 class="step-title" style="margin-bottom:10px;">What's your hair condition like?</h2>
+                <span class="step-subtitle">Choose all that apply</span>
+            </div>
+
+            <div class="selection-list" id="condition-list">
+                <div class="selection-item multi-select multi-check-item" onclick="toggleCondition(this, 'healthy')"> <i
+                        class="bi bi-square condition-check check-icon"></i><span class="selection-text">💪 Healthy and
+                        strong</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleCondition(this, 'dry')"> <i
+                        class="bi bi-square condition-check check-icon"></i><span class="selection-text">🌵 Dry or
+                        brittle</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleCondition(this, 'oily')"> <i
+                        class="bi bi-square condition-check check-icon"></i><span class="selection-text">💧 Oily / Gets
+                        greasy quickly</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleCondition(this, 'damaged')"> <i
+                        class="bi bi-square condition-check check-icon"></i><span class="selection-text">🔥 Damaged from
+                        heat / color</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleCondition(this, 'frizzy')"> <i
+                        class="bi bi-square condition-check check-icon"></i><span class="selection-text">⚡ Frizzy</span>
+                </div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleCondition(this, 'split_ends')">
+                    <i class="bi bi-square condition-check check-icon"></i><span class="selection-text">✂️ Split
+                        ends</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleCondition(this, 'thinning')"><i
+                        class="bi bi-square condition-check check-icon"></i><span class="selection-text">📉 Thinning /
+                        Hair loss</span></div>
+            </div>
+
+            <div class="sticky-action-bar">
+                <div class="sticky-action-inner">
+                    <button id="conditionNextBtn" class="pill-next-btn" onclick="goToNextFromCondition()" disabled>NEXT
+                        STEP</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 10: REFINE ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step center-text" id="step-refine-female" style="display:none;">
+            <div class="refine-body">
+                <h2>Refine Your Timeless Look</h2>
+                <p><span class="refine-highlight">Let's fine-tune it</span> with small, smart upgrades.</p>
+            </div>
+
+            <div class="refine-image-wrap">
+                <div class="refine-glow"></div>
+                <div style="position:relative;">
+                    <div class="refine-divider"></div>
+                    <img src="/uploads/light-young-BqigrWl0.png" alt="AI Hair Refinement"
+                        style="width:100%; display:block;">
+                </div>
+            </div>
+
+            <div class="refine-btn-wrap">
+                <button class="pill-next-btn gold-btn" onclick="goToNextFromRefine()">CONTINUE</button>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 11: RENK ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-color-female" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-header-label">Hair Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:70%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">What's your current hair color?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectColorFemale('black')">
+                    <div class="color-row">
+                        <div class="color-dot" style="background:#2c2d31"></div> <span
+                            class="selection-text">Black</span>
+                    </div>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectColorFemale('dark_brown')">
+                    <div class="color-row">
+                        <div class="color-dot" style="background:#6d4c41"></div> <span class="selection-text">Dark
+                            brown</span>
+                    </div>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectColorFemale('light_brown')">
+                    <div class="color-row">
+                        <div class="color-dot" style="background:linear-gradient(135deg,#d27d2d,#a65e2e)"></div> <span
+                            class="selection-text">Light brown</span>
+                    </div>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectColorFemale('blonde')">
+                    <div class="color-row">
+                        <div class="color-dot" style="background:linear-gradient(135deg,#f5c542,#f9e076)"></div> <span
+                            class="selection-text">Blonde</span>
+                    </div>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectColorFemale('red')">
+                    <div class="color-row">
+                        <div class="color-dot" style="background:#c73e4b"></div> <span class="selection-text">Red</span>
+                    </div>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectColorFemale('gray_silver')">
+                    <div class="color-row">
+                        <div class="color-dot" style="background:linear-gradient(135deg,#c0c0c0,#e8e8e8)"></div> <span
+                            class="selection-text">Gray / Silver</span>
+                    </div>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectColorFemale('fashion')">
+                    <div class="color-row">
+                        <div class="color-dot" style="background:linear-gradient(135deg,#4287f5,#f542a1)"></div> <span
+                            class="selection-text">Fashion color (blue, pink, etc.)</span>
+                    </div>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 12: RENK DEĞİŞTİR ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-change-color-female" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-header-label">Hair Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:84%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="step-title">Want to change your hair color?</h2>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectChangeColorFemale('yes_new')"><span
+                        class="selection-text">🙋‍♀️ Yes, I want a new color</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectChangeColorFemale('yes_subtle')"><span
+                        class="selection-text">🌤️ Yes, a subtle change or highlights</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectChangeColorFemale('maybe')"><span class="selection-text">💡
+                        Maybe, open to suggestions</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectChangeColorFemale('no_just_cut')"><span
+                        class="selection-text">✂️ No, just a haircut</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 13: TON (çoklu seçim) ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-shades-female" style="display:none; padding-bottom:100px;">
+            <div class="progress-header">
+                <span class="progress-header-label">Hair Profile</span>
+                <div class="progress-bars">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-text" style="margin-bottom:30px;">
+                <h2 class="step-title" style="margin-bottom:10px;">What shades appeal to you?</h2>
+                <span class="step-subtitle">Select all that interest you</span>
+            </div>
+
+            <div class="selection-list" id="shades-list">
+                <div class="selection-item multi-select multi-check-item" onclick="toggleShade(this, 'warm')"><i
+                        class="bi bi-square shade-check check-icon"></i><span class="selection-text">🍯 Warm (golden,
+                        copper, caramel)</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleShade(this, 'cool')"><i
+                        class="bi bi-square shade-check check-icon"></i><span class="selection-text">❄️ Cool (ash,
+                        platinum, silver)</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleShade(this, 'brown_black')"><i
+                        class="bi bi-square shade-check check-icon"></i><span class="selection-text">🟫 Brown and
+                        Black</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleShade(this, 'red_burgundy')"><i
+                        class="bi bi-square shade-check check-icon"></i><span class="selection-text">🟥 Red and
+                        Burgundy</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleShade(this, 'neutral_blonde')">
+                    <i class="bi bi-square shade-check check-icon"></i><span class="selection-text">🟨 Neutral
+                        Blonde</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleShade(this, 'balayage')"><i
+                        class="bi bi-square shade-check check-icon"></i><span class="selection-text">✨ Balayage and
+                        highlights</span></div>
+                <div class="selection-item multi-select multi-check-item" onclick="toggleShade(this, 'fashion_colors')">
+                    <i class="bi bi-square shade-check check-icon"></i><span class="selection-text">🟦 Bold fashion
+                        colors</span></div>
+            </div>
+
+            <div class="sticky-action-bar">
+                <div class="sticky-action-inner">
+                    <button id="shadesNextBtn" class="pill-next-btn" onclick="goToNextFromShades()" disabled>NEXT
+                        STEP</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════ ADIM 14: DOKU (erkek) ════════════════════ -->
+        <div class="ai-quiz-container fade-in-step" id="step-texture" style="display:none;">
+            <div class="quiz-progress-wrapper">
+                <span class="progress-label">Hair Profile</span>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width:15%"></div>
+                </div>
+            </div>
+
+            <div class="question-header">
+                <h2 class="question-title">What's your natural hair texture?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectTexture('straight')"><span
+                        class="selection-text">Straight</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectTexture('wavy')"><span class="selection-text">Wavy</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectTexture('curly')"><span class="selection-text">Curly</span>
+                    <div class="selection-circle"></div>
+                </div>
+                <div class="selection-item" onclick="selectTexture('coily')"><span class="selection-text">Coily</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /ai-studio-wrapper -->
+
+    <script src="ai-script.js"></script>
+</body>
+
+</html>

@@ -13,6 +13,9 @@ let userData = {
     shades: [],
     thinning: '',
     faceShape: '',
+    features: [],
+    balanceFeatures: [],
+    lifestyle: [],
     goal: '',
     avoid: '',
     styles: '',
@@ -212,10 +215,9 @@ function selectChangeColorFemale(changeValue) {
 
     if (changeValue === 'no_just_cut') {
         // EĞER SADECE KESİM İSTİYORSA RENK SORULARINI ATLA
-        alert("Sadece kesim istendi, Renk Tonları sayfası atlanıyor.\nDoğrudan 'Face Shape' bölümüne geçilecek!");
-        // changeScreen('step-change-color-female', 'step-faceshape-female');
+        changeScreen('step-change-color-female', 'step-faceshape-female');
     } else {
-        // EĞER RENK İSTİYORSA 12. ADIMA (SHADES) GEÇ
+        // RENK İSTİYORSA 12. ADIMA (SHADES) GEÇ
         changeScreen('step-change-color-female', 'step-shades-female');
     }
 }
@@ -253,14 +255,144 @@ function goToNextFromShades() {
         alert("Lütfen en az bir ton seçin.");
         return;
     }
-
-    // Geri dönüldüğünde buton kaybolmasın diye sadece geçiş yapıyoruz (8. adımdaki gibi düzeltilmiş hali)
     console.log("Seçilen tonlar:", userData.shades);
 
-    // Burası Face Shape adımı hazır olduğunda aktif edilecek
-    alert("Hair Profile tamamlandı!\nSeçilen Tonlar: " + userData.shades.join(', ') + "\n\nSırada yeni kategori var: FACE SHAPE!");
+    // Alerti silip geçiş kodunu aktif ettik
+    changeScreen('step-shades-female', 'step-faceshape-female');
+}
 
-    // changeScreen('step-shades-female', 'step-faceshape-female');
+// Adım 13: Yüz Şekli seçildiğinde çalışacak
+function selectFaceShape(shapeValue) {
+    userData.faceShape = shapeValue;
+    console.log("Yüz şekli kaydedildi:", userData);
+
+    // Alerti sildik, geçişi açtık
+    changeScreen('step-faceshape-female', 'step-features-female');
+}
+
+// Adım 14: Çoklu seçim (Yüz Hatları) işaretleme fonksiyonu
+function toggleFeature(element, featureValue) {
+    const icon = element.querySelector('.feature-check');
+    const index = userData.features.indexOf(featureValue);
+    const nextBtn = document.getElementById('featuresNextBtn');
+
+    if (index === -1) {
+        // Eğer "None specifically" (Hiçbiri) seçilirse diğerlerini temizleme mantığı eklenebilir
+        // Şimdilik standart çoklu seçim yapıyoruz:
+        userData.features.push(featureValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        userData.features.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.features.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 14'ten sonraki adıma geçiş
+function goToNextFromFeatures() {
+    if (userData.features.length === 0) {
+        alert("Lütfen en az bir seçenek işaretleyin.");
+        return;
+    }
+
+    console.log("Seçilen vurgulanacak hatlar:", userData.features);
+
+    // Geçişi aktif ettik
+    changeScreen('step-features-female', 'step-balance-female');
+}
+
+// Adım 15: Çoklu seçim (Dengelenecek Hatlar) işaretleme fonksiyonu
+function toggleBalance(element, balanceValue) {
+    const icon = element.querySelector('.balance-check');
+    const index = userData.balanceFeatures.indexOf(balanceValue);
+    const nextBtn = document.getElementById('balanceNextBtn');
+
+    if (index === -1) {
+        userData.balanceFeatures.push(balanceValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        userData.balanceFeatures.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.balanceFeatures.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 15'ten sonraki adıma geçiş
+function goToNextFromBalance() {
+    if (userData.balanceFeatures.length === 0) {
+        alert("Lütfen en az bir seçenek işaretleyin.");
+        return;
+    }
+    console.log("Seçilen dengelenecek hatlar:", userData.balanceFeatures);
+
+    changeScreen('step-balance-female', 'step-lifestyle-female');
+}
+
+// Adım 16: Çoklu seçim (Yaşam Tarzı) işaretleme fonksiyonu
+function toggleLifestyle(element, lifestyleValue) {
+    const icon = element.querySelector('.lifestyle-check');
+    const index = userData.lifestyle.indexOf(lifestyleValue);
+    const nextBtn = document.getElementById('lifestyleNextBtn');
+
+    if (index === -1) {
+        userData.lifestyle.push(lifestyleValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        userData.lifestyle.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.lifestyle.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 16'dan sonraki adıma geçiş
+function goToNextFromLifestyle() {
+    if (userData.lifestyle.length === 0) {
+        alert("Lütfen en az bir seçenek işaretleyin.");
+        return;
+    }
+
+    console.log("Seçilen yaşam tarzı özellikleri:", userData.lifestyle);
+
+    // Burası 17. Adım hazır olduğunda aktif edilecek
+    alert("Yaşam tarzı özellikleri kaydedildi!\nSırada 17. Adım var!");
+
+    // changeScreen('step-lifestyle-female', 'step-sonraki-adim');
 }
 
 function selectTexture(textureValue) {
