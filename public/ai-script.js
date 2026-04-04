@@ -16,6 +16,9 @@ let userData = {
     features: [],
     balanceFeatures: [],
     lifestyle: [],
+    primaryGoal: '',
+    appealingStyles: [],
+    targetLength: '',
     goal: '',
     avoid: '',
     styles: '',
@@ -389,10 +392,68 @@ function goToNextFromLifestyle() {
 
     console.log("Seçilen yaşam tarzı özellikleri:", userData.lifestyle);
 
-    // Burası 17. Adım hazır olduğunda aktif edilecek
-    alert("Yaşam tarzı özellikleri kaydedildi!\nSırada 17. Adım var!");
+    // Geçişi aktif ettik (16. Adım gizlendiği an içindeki sabit bar da otomatik gizlenecek)
+    changeScreen('step-lifestyle-female', 'step-goal-female');
+}
 
-    // changeScreen('step-lifestyle-female', 'step-sonraki-adim');
+// Adım 17: Hedef seçildiğinde çalışacak (Tekli Seçim)
+function selectGoalFemale(goalValue) {
+    userData.primaryGoal = goalValue;
+    console.log("Birincil hedef kaydedildi:", userData);
+
+    // Ara sayfa olmadan doğrudan yeni soruya uçuyoruz!
+    changeScreen('step-goal-female', 'step-styles-female');
+}
+// Adım 18: Çoklu seçim (Hitap Eden Stiller) işaretleme fonksiyonu
+function toggleStyle(element, styleValue) {
+    const icon = element.querySelector('.style-check');
+    const index = userData.appealingStyles.indexOf(styleValue);
+    const nextBtn = document.getElementById('stylesNextBtn');
+
+    if (index === -1) {
+        userData.appealingStyles.push(styleValue);
+        element.style.background = '#f9f5ff';
+        element.style.borderColor = '#8b5cf6';
+        icon.classList.remove('bi-square');
+        icon.classList.add('bi-check-square-fill');
+    } else {
+        userData.appealingStyles.splice(index, 1);
+        element.style.background = '#fff';
+        element.style.borderColor = '#eee';
+        icon.classList.remove('bi-check-square-fill');
+        icon.classList.add('bi-square');
+    }
+
+    // Seçim varsa butonu aktif et
+    if (userData.appealingStyles.length > 0) {
+        nextBtn.disabled = false;
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+
+// Adım 18'den (Stiller) Adım 19'a geçiş
+function goToNextFromStyles() {
+    if (userData.appealingStyles.length === 0) {
+        alert("Lütfen en az bir stil işaretleyin.");
+        return;
+    }
+
+    console.log("Seçilen stiller:", userData.appealingStyles);
+
+    // Geçişi aktif ettik (18. Adım çoklu seçim olduğu için butonla geçiliyor)
+    changeScreen('step-styles-female', 'step-target-length-female');
+}
+
+// Adım 19: Hedeflenen Uzunluk seçildiğinde çalışacak (Tekli Seçim)
+function selectTargetLengthFemale(lengthValue) {
+    userData.targetLength = lengthValue;
+    console.log("Hedeflenen uzunluk kaydedildi:", userData);
+    
+    // Burası 20. Adım hazır olduğunda aktif edilecek
+    alert("Uzunluk seçildi: " + lengthValue + ". Sırada 20. Adım var!");
+    
+    // changeScreen('step-target-length-female', 'step-sonraki-adim');
 }
 
 function selectTexture(textureValue) {

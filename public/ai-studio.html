@@ -957,10 +957,13 @@
 
         </div>
 
-        <div class="ai-quiz-container fade-in-step" id="step-lifestyle-female" style="display: none; padding-bottom: 100px;">
-            
+        <div class="ai-quiz-container fade-in-step" id="step-lifestyle-female"
+            style="display: none; padding-bottom: 100px;">
+
             <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
-                <span style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">FACE & FEATURES</span>
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">FACE
+                    & FEATURES</span>
                 <div style="display: flex; gap: 8px; width: 200px; margin: 0 auto; height: 5px;">
                     <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
                         <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
@@ -975,12 +978,15 @@
             </div>
 
             <div class="question-header" style="text-align: center; margin-bottom: 30px;">
-                <h2 class="question-title" style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">Do any of these apply to you?</h2>
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    Do any of these apply to you?</h2>
                 <span style="color: #888; font-size: 15px;">Helps us suggest practical styles</span>
             </div>
 
             <div class="selection-list" id="lifestyle-list">
-                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'glasses')" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'glasses')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <span style="font-size: 20px;">👓</span>
                         <span class="selection-text">Wear glasses regularly</span>
@@ -988,7 +994,8 @@
                     <i class="bi bi-square lifestyle-check" style="color: #8b5cf6; font-size: 22px;"></i>
                 </div>
 
-                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'sports')" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'sports')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <span style="font-size: 20px;">🏃‍♀️</span>
                         <span class="selection-text">Active lifestyle / Sports</span>
@@ -996,7 +1003,8 @@
                     <i class="bi bi-square lifestyle-check" style="color: #8b5cf6; font-size: 22px;"></i>
                 </div>
 
-                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'professional')" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'professional')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <span style="font-size: 20px;">💼</span>
                         <span class="selection-text">Professional / corporate environment</span>
@@ -1004,7 +1012,8 @@
                     <i class="bi bi-square lifestyle-check" style="color: #8b5cf6; font-size: 22px;"></i>
                 </div>
 
-                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'sensitive_scalp')" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'sensitive_scalp')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <span style="font-size: 20px;">⚠️</span>
                         <span class="selection-text">Scalp sensitivity</span>
@@ -1012,7 +1021,8 @@
                     <i class="bi bi-square lifestyle-check" style="color: #8b5cf6; font-size: 22px;"></i>
                 </div>
 
-                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'none')" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="selection-item multi-select" onclick="toggleLifestyle(this, 'none')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <span style="font-size: 20px;">🚫</span>
                         <span class="selection-text">None of these</span>
@@ -1023,13 +1033,367 @@
 
             <div class="sticky-action-bar">
                 <div class="sticky-action-inner">
-                    <button id="lifestyleNextBtn" class="pill-next-btn" onclick="goToNextFromLifestyle()" disabled>NEXT STEP</button>
+                    <button id="lifestyleNextBtn" class="pill-next-btn" onclick="goToNextFromLifestyle()" disabled>NEXT
+                        STEP</button>
                 </div>
             </div>
 
         </div>
 
-        
+        <div class="ai-quiz-container fade-in-step" id="step-goal-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">STYLE
+                    & GOALS</span>
+                <div style="display: flex; gap: 6px; width: 240px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 25%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    What's your primary goal?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectGoalFemale('transformation')">
+                    <span class="selection-text">🔥 Complete transformation</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectGoalFemale('refresh')">
+                    <span class="selection-text">🔄 Refresh my current style</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectGoalFemale('age_appropriate')">
+                    <span class="selection-text">🎯 Age-appropriate update</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectGoalFemale('look_younger')">
+                    <span class="selection-text">🌟 Look younger / more modern</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectGoalFemale('low_maintenance')">
+                    <span class="selection-text">⏱️ Low-maintenance style</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="ai-quiz-container fade-in-step" id="step-styles-female"
+            style="display: none; padding-bottom: 100px;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">STYLE
+                    & GOALS</span>
+                <div style="display: flex; gap: 6px; width: 240px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 50%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header" style="text-align: center; margin-bottom: 30px;">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    Which styles appeal to you?</h2>
+                <span style="color: #888; font-size: 15px;">Choose all that you like</span>
+            </div>
+
+            <div class="selection-list" id="styles-list">
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'classic')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">👗</span>
+                        <span class="selection-text">Classic / Timeless</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'modern')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">🔥</span>
+                        <span class="selection-text">Modern / Trendy</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'edgy')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">⚡</span>
+                        <span class="selection-text">Edgy / Bold</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'romantic')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">💕</span>
+                        <span class="selection-text">Romantic / Soft</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'minimal')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">✨</span>
+                        <span class="selection-text">Minimal / Simple</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'bohemian')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">🌸</span>
+                        <span class="selection-text">Bohemian / Free-spirited</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'glamorous')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">💎</span>
+                        <span class="selection-text">Glamorous / Polished</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyle(this, 'natural')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">🍃</span>
+                        <span class="selection-text">Natural / Effortless</span>
+                    </div>
+                    <i class="bi bi-square style-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+            </div>
+
+            <div class="sticky-action-bar">
+                <div class="sticky-action-inner">
+                    <button id="stylesNextBtn" class="pill-next-btn" onclick="goToNextFromStyles()" disabled>NEXT
+                        STEP</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="ai-quiz-container fade-in-step" id="step-target-length-female" style="display: none;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">STYLE
+                    & GOALS</span>
+                <div style="display: flex; gap: 6px; width: 240px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 75%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    What length would you like?</h2>
+            </div>
+
+            <div class="selection-list">
+                <div class="selection-item" onclick="selectTargetLengthFemale('pixie')">
+                    <span class="selection-text">👱‍♀️ Pixie / Very short</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTargetLengthFemale('short')">
+                    <span class="selection-text">💇‍♀️ Short / Above shoulders</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTargetLengthFemale('medium')">
+                    <span class="selection-text">👱‍♀️ Medium / Shoulder length</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTargetLengthFemale('long')">
+                    <span class="selection-text">👱‍♀️ Long / Below shoulders</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTargetLengthFemale('keep_current')">
+                    <span class="selection-text">🔄 Keep current length</span>
+                    <div class="selection-circle"></div>
+                </div>
+
+                <div class="selection-item" onclick="selectTargetLengthFemale('open')">
+                    <span class="selection-text">✨ Open to anything</span>
+                    <div class="selection-circle"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-quiz-container fade-in-step" id="step-style-elements-female"
+            style="display: none; padding-bottom: 100px;">
+
+            <div class="quiz-progress-wrapper" style="margin-bottom: 30px; text-align: center;">
+                <span
+                    style="font-size: 14px; font-weight: 700; color: #8b5cf6; display: block; margin-bottom: 10px;">STYLE
+                    & GOALS</span>
+                <div style="display: flex; gap: 6px; width: 240px; margin: 0 auto; height: 5px;">
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%;"></div>
+                    </div>
+
+                    <div style="flex: 1; background: #eee; border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; background: #8b5cf6; width: 100%; transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-header" style="text-align: center; margin-bottom: 30px;">
+                <h2 class="question-title"
+                    style="font-family: 'Lato', sans-serif; font-size: 32px; font-weight: 800; color: #1a2b3c; margin-bottom: 10px;">
+                    Which style elements interest you?</h2>
+                <span style="color: #888; font-size: 15px;">Select all that apply</span>
+            </div>
+
+            <div class="selection-list" id="style-elements-list">
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'bangs')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">✂️</span>
+                        <span class="selection-text">Bangs / Fringe</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'layers')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">🪶</span>
+                        <span class="selection-text">Layers</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'asymmetrical')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">📐</span>
+                        <span class="selection-text">Asymmetrical cut</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'undercut')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">🪒</span>
+                        <span class="selection-text">Undercut / Shaved sides</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'texture_waves')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">🌊</span>
+                        <span class="selection-text">Texture / Waves</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'sleek_straight')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">💎</span>
+                        <span class="selection-text">Sleek / Straight</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'volume')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">💆‍♀️</span>
+                        <span class="selection-text">Volume at roots</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'braids_updos')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">👱‍♀️</span>
+                        <span class="selection-text">Braids / Updos capability</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+
+                <div class="selection-item multi-select" onclick="toggleStyleElement(this, 'keep_simple')"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 20px;">✅</span>
+                        <span class="selection-text">Keep it simple</span>
+                    </div>
+                    <i class="bi bi-square element-check" style="color: #8b5cf6; font-size: 22px;"></i>
+                </div>
+            </div>
+
+            <div class="sticky-action-bar">
+                <div class="sticky-action-inner">
+                    <button id="styleElementsNextBtn" class="pill-next-btn" onclick="goToNextFromStyleElements()"
+                        disabled>NEXT STEP</button>
+                </div>
+            </div>
+
+        </div>
 
         <div class="ai-quiz-container fade-in-step" id="step-texture" style="display: none;">
 
