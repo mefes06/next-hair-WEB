@@ -322,6 +322,253 @@ body[data-theme="dark"] .nav-search-dropdown input:focus {
     }
 }
 
+/* ============================================================ */
+/* AI HERO SECTION (BEFORE/AFTER SLIDER)                        */
+/* ============================================================ */
+
+.ai-hero-section {
+    background-color: #fdfaf5; /* Soft beige/cream */
+    padding: 60px 0;
+    border-bottom: 1px solid #f0ebe1;
+}
+
+.ai-hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.ai-hero-text {
+    flex: 1;
+    max-width: 500px;
+}
+
+.ai-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.ai-hero-highlight {
+    color: #d32f2f; /* Site Red */
+    font-style: italic;
+    font-family: inherit;
+}
+
+.ai-hero-desc {
+    font-size: 16px;
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.ai-try-btn {
+    display: inline-block;
+    background-color: #2f4f4f; /* Dark Slate Gray */
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 35px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(47, 79, 79, 0.3);
+    margin-bottom: 30px;
+}
+
+.ai-try-btn:hover {
+    background-color: #233d3d; /* Darker Slate Gray */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(47, 79, 79, 0.4);
+    color: white;
+}
+
+.ai-hero-social {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ai-avatars {
+    display: flex;
+}
+
+.ai-avatars img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fdfaf5;
+    margin-left: -12px;
+}
+.ai-avatars img:first-child {
+    margin-left: 0;
+}
+
+.ai-social-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+}
+.ai-social-text a {
+    color: #d97706;
+    text-decoration: underline;
+}
+
+/* SLIDER RIGHT SIDE */
+.ai-slider-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.before-after-slider {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    background: #e5e7eb;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+}
+
+.before-after-slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* prevent dragging */
+}
+
+.ba-img-after {
+    clip-path: inset(0 0 0 50%); /* crops the left 50% */
+}
+
+/* Divider line */
+.ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: white;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Handle circle */
+.ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+    cursor: grab;
+    color: #555;
+    font-size: 14px;
+}
+.ba-handle:active {
+    cursor: grabbing;
+}
+
+.ba-badge-after {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ba-badge-before {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Mobile Responsive For Slider */
+@media (max-width: 768px) {
+    .ai-hero-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .ai-hero-text {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .ai-hero-title {
+        font-size: 38px;
+    }
+    .ai-slider-wrapper {
+        width: 100%;
+        justify-content: center;
+        margin-top: 20px;
+    }
+}
+
+/* ============================================================ */
+/* AI HERO SECTION - DARK MODE                                  */
+/* ============================================================ */
+body[data-theme="dark"] .ai-hero-section {
+    background-color: #1a1a1a;
+    border-bottom: none;
+}
+
+body[data-theme="dark"] .ai-hero-title {
+    color: #f0f0f0;
+}
+
+body[data-theme="dark"] .ai-hero-desc,
+body[data-theme="dark"] .ai-social-text {
+    color: #aaa;
+}
+
+body[data-theme="dark"] .ai-avatars img {
+    border-color: #1a1a1a;
+}
+
+body[data-theme="dark"] .before-after-slider {
+    background: #2a2a2a;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+body[data-theme="dark"] .ba-handle {
+    background: #333;
+    color: #eee;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
 /*SONSUZ KAYAN ŞERİT*/
 
 /*Sadece çerçeve görevi görür, taşanları gizler */
@@ -434,8 +681,9 @@ body[data-theme="dark"] .nav-search-dropdown input:focus {
     /* Navbar'dan 50px sonra 30px boşluk bırakarak yapış */
     height: fit-content;
     /* Sidebar sadece içeriği kadar yer kaplasın, uzamasın */
-    align-self: start;
     /* Flex yapısında yukarı yaslı kalsın */
+    transform: translateZ(0);
+    /* Animasyonlu Scrollarda Titremeyi (Jitter) Engeller */
 }
 
 /* Mobilde yapışkan özelliği kapatmak*/
@@ -893,11 +1141,8 @@ body[data-theme="dark"] .blog-card {
 
 /* 5. SIDEBAR WIDGETLARI*/
 body[data-theme="dark"] .sidebar-widget {
-    background-color: #1e1e1e !important;
-    border: 1px solid #333 !important;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    background-color: transparent !important;
+    border: none !important;
 }
 
 /* 6. YAZI VE BAŞLIK RENKLERİ */
@@ -905,6 +1150,7 @@ body[data-theme="dark"] h1,
 body[data-theme="dark"] h2,
 body[data-theme="dark"] h3,
 body[data-theme="dark"] .blog-title,
+body[data-theme="dark"] .strip-title,
 body[data-theme="dark"] .widget-title {
     color: #ffffff !important;
 }
@@ -921,7 +1167,7 @@ body[data-theme="dark"] .section-title,
 body[data-theme="dark"] .widget-title,
 body[data-theme="dark"] .list-item,
 body[data-theme="dark"] .category-list li {
-    border-color: #333 !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 body[data-theme="dark"] .list-info {

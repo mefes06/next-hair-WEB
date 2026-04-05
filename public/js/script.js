@@ -534,3 +534,45 @@ async function benzerleriGetir(currentId, fullCategoryString) {
         console.error("Benzer içerik hatası:", err);
     }
 }
+
+// ==========================================
+// 5. AI HERO SECTION BEFORE/AFTER SLIDER LOGIC
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const baSlider = document.getElementById("ba-slider");
+    if (!baSlider) return;
+    
+    const afterImgWrapper = document.getElementById("ba-img-after");
+    const handle = document.getElementById("ba-handle");
+    const divider = document.getElementById("ba-divider");
+
+    const slide = (e) => {
+        let x = 0;
+        const rect = baSlider.getBoundingClientRect();
+        
+        if (e.type.includes('mouse')) {
+            x = e.pageX - (rect.left + window.scrollX);
+        } else if (e.type.includes('touch')) {
+            // Touch still needs to drag across the screen usually
+            x = e.touches[0].pageX - (rect.left + window.scrollX);
+        }
+
+        // Calculate percentage (0 to 100)
+        let percent = (x / rect.width) * 100;
+        
+        // Boundaries
+        if (percent < 0) percent = 0;
+        if (percent > 100) percent = 100;
+
+        // Apply visual updates (clip from the left side)
+        afterImgWrapper.style.clipPath = `inset(0 0 0 ${percent}%)`;
+        handle.style.left = `${percent}%`;
+        divider.style.left = `${percent}%`;
+    };
+
+    // Hover (Mouse Move) Events - No click required
+    baSlider.addEventListener("mousemove", slide);
+
+    // Touch Events for Mobile
+    baSlider.addEventListener("touchmove", slide, {passive: true});
+});
